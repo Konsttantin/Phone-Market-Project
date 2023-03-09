@@ -1,0 +1,199 @@
+@import './settings.scss';
+
+.container {
+  max-width: 1600px;
+
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+.header {
+  position: sticky;
+  top: 0;
+
+  background-color: #fcfcfc;
+  
+  box-shadow: 0px 0px 15px 0px rgba(61,61,61,0.3);
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 8rem;
+  }
+
+  &__logo {
+    font-family: 'Rubik Mono One', sans-serif;
+    font-size: 3.5rem;
+  }
+
+  &__link {
+    transition: all .2s ease;
+
+    &:hover {
+      color: white;
+      text-shadow: -2px 2px 0 #000,
+            2px 2px 0 #000,
+            2px -2px 0 #000,
+            -2px -2px 0 #000;
+    }
+  }
+
+  &__searchbar {
+    flex-basis: 70rem;
+  }
+
+  &__field {
+    width: 100%;
+    height: 4rem;
+
+    padding-left: 40px;
+
+    background: no-repeat url(./svg/magnifying-glass.svg);
+    background-position: left;
+    background-size: contain;
+    background-color: #fdfdfd;
+
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px 0px rgba(61,61,61,0.4);
+
+    font-size: 2rem;
+
+    transition: all .3s ease;
+
+    &:hover {
+      box-shadow: 0px 2px 5px 0px rgba(61,61,61,0.4);
+    }
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: space-around;
+    flex-basis: 12rem;
+  }
+
+  &__icon {
+    display: inline-block;
+
+    width: 4rem;
+    height: 4rem;
+
+    color: #fff;
+
+    &--heart:hover {
+      color: #c13434;
+    }
+
+    &--basket:hover {
+      color: #0094CA;
+    }
+  }
+
+  .animatedSvg {
+    color: currentColor;
+    fill: currentColor;
+    transition: all .3s ease;
+  }
+}
+
+
+
+/* MAIN SECTION */
+
+.main {
+  height: 100vh;
+
+  &__header {
+    font-size: 3.5rem;
+    line-height: 10rem;
+  }
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+
+    height: 50rem;
+
+    
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    height: 100%;
+    flex-grow: 1;
+  }
+}
+
+.filters {
+  width: 30rem;
+  height: 100%;
+
+  background-color: #fff;
+}
+
+.sort-options {
+  display: flex;
+  justify-content: start;
+
+  padding-left: 10px;
+
+  background-color: #fff;
+
+  &__description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: max-content;
+
+    font-size: 1.5rem;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 1.5vw;
+
+    width: 100%;
+
+    padding-left: 10px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: max-content;
+    height: 6rem;
+
+    font-size: 1.5rem;
+
+    cursor: pointer;
+
+    &:hover {
+      color: #00B2F2;
+    }
+
+    &.active {
+      color: #00B2F2;
+
+      border-bottom: 3px solid #00B2F2;
+    }
+  }
+}
+
+.goods {
+  flex-grow: 1;
+
+  height: fit-content;
+  background-color: #fff;
+}
