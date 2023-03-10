@@ -46,7 +46,35 @@
       <section class="main__body">
         <aside class="filters">
           <ul class="filters__list">
+            <li class="filter">
+              <div class="filter__description">
+                <span class="filter__name">Цена</span>
+                <div class="filter__toggler"></div>
+              </div>
 
+              <div class="filter__content">
+                <div class="price-container">
+                  <input type="number" class="price">
+                  <div class="delimiter"></div>
+                  <input type="number" class="price">
+                </div>
+              </div>
+            </li>
+            
+            <li class="filter">
+              <div class="filter__description">
+                <span class="filter__name">Цена</span>
+                <div class="filter__toggler"></div>
+              </div>
+
+              <div class="filter__content">
+                <div class="price-container">
+                  <input type="number" class="price">
+                  <div class="delimiter"></div>
+                  <input type="number" class="price">
+                </div>
+              </div>
+            </li>
           </ul>
         </aside>
         
@@ -56,8 +84,8 @@
             <ul class="sort-options__list">
               <li class="sort-options__item active">цене ↑</li>
               <li class="sort-options__item">цене ↓</li>
-              <li class="sort-options__item">Популярности</li>
-              <li class="sort-options__item">По умолчанию</li>
+              <li class="sort-options__item">рейтингу</li>
+              <li class="sort-options__item">по умолчанию</li>
             </ul>
           </div>
 
@@ -68,5 +96,7 @@
       </section>
     </div>
   </main>
+
+  <script src="./script.js"></script>
 </body>
 </html>
