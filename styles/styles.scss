@@ -3,6 +3,7 @@
 
 .container {
   max-width: 1600px;
+  height: 100%;
 
   margin: 0 auto;
 }
@@ -22,7 +23,7 @@
     justify-content: space-between;
     align-items: center;
 
-    height: 8rem;
+    height: $header-height;
   }
 
   &__logo {
@@ -34,7 +35,7 @@
     transition: all .2s ease;
 
     &:hover {
-      color: white;
+      color: #fff;
       text-shadow: -2px 2px 0 #000,
             2px 2px 0 #000,
             2px -2px 0 #000,
@@ -105,7 +106,7 @@
 /* ---------- MAIN SECTION ---------- */
 
 .main {
-  height: 100vh;
+  height: 200vh;
 
   &__header {
     font-size: 3.5rem;
@@ -117,9 +118,7 @@
     justify-content: space-between;
     gap: 5px;
 
-    height: 50rem;
-
-    
+    height: 100%;
   }
 
   &__content {
@@ -135,8 +134,12 @@
 /* ----- filters ----- */
 
 .filters {
+  align-self: flex-start;
+  position: sticky;
+
+  top: calc($header-height + 10px);
+
   width: 300px;
-  height: 100%;
 
   &__list {
     display: flex;
@@ -247,9 +250,75 @@
         background-color: $main-text-color;
       }
     }
+  }
 
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding-top: 15px;
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__checkbox {
+    position: absolute;
+
+    appearance: none;
+
+    &:checked + .filter__label::before {
+      background-color: $main-blue;
+    }
+  }
+
+  &__label {
+    font-size: 1.5rem;
+
+    padding-left: 22px;
+
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+
+      left: 0;
+      top: 0;
+
+      width: 15px;
+      height: 15px;
+
+      border: 1px solid #eee;
+      border-radius: 4px;
+
+      background-color: #fff;
+
+      transition: background-color .2s ease;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+
+      left: 2px;
+      top: 2px;
+
+      width: 12px;
+      height: 12px;
+
+      background-image: url(../svg/check-mark.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 }
+
+/* ----- sort options ----- */
 
 .sort-options {
   display: flex;
@@ -293,16 +362,18 @@
     cursor: pointer;
 
     &:hover {
-      color: #00B2F2;
+      color: $main-blue;
     }
 
     &.active {
-      color: #00B2F2;
+      color: $main-blue;
 
-      border-bottom: 3px solid #00B2F2;
+      border-bottom: 3px solid $main-blue;
     }
   }
 }
+
+/* ----- goods ----- */
 
 .goods {
   flex-grow: 1;

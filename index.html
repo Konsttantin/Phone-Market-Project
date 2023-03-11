@@ -63,16 +63,125 @@
             
             <li class="filter">
               <div class="filter__description">
-                <span class="filter__name">Цена</span>
+                <span class="filter__name">Производитель</span>
                 <div class="filter__toggler"></div>
               </div>
 
               <div class="filter__content">
-                <div class="price-container">
-                  <input type="number" class="price">
-                  <div class="delimiter"></div>
-                  <input type="number" class="price">
-                </div>
+                <ul class="filter__list">
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="brand" id="SAMSUNG">
+                    <label class="filter__label" for="SAMSUNG">SAMSUNG</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="brand" id="APPLE">
+                    <label class="filter__label" for="APPLE">APPLE</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="brand" id="TECNO">
+                    <label class="filter__label" for="TECNO">TECNO</label>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="filter">
+              <div class="filter__description">
+                <span class="filter__name">Встроенная память</span>
+                <div class="filter__toggler"></div>
+              </div>
+
+              <div class="filter__content">
+                <ul class="filter__list">
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="volume" id="64gb">
+                    <label class="filter__label" for="64gb">64 ГБ</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="volume" id="128gb">
+                    <label class="filter__label" for="128gb">128 ГБ</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="volume" id="256gb">
+                    <label class="filter__label" for="256gb">256 ГБ</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="volume" id="512gb">
+                    <label class="filter__label" for="512gb">512 ГБ</label>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="filter">
+              <div class="filter__description">
+                <span class="filter__name">Оперативная память</span>
+                <div class="filter__toggler"></div>
+              </div>
+
+              <div class="filter__content">
+                <ul class="filter__list">
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="ram" id="2ram">
+                    <label class="filter__label" for="2ram">2 ГБ</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="ram" id="3ram">
+                    <label class="filter__label" for="3ram">3 ГБ</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="ram" id="4ram">
+                    <label class="filter__label" for="4ram">4 ГБ</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="ram" id="6ram">
+                    <label class="filter__label" for="6ram">6 ГБ</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="ram" id="8ram">
+                    <label class="filter__label" for="8ram">8 ГБ</label>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="filter">
+              <div class="filter__description">
+                <span class="filter__name">Кол-во SIM-карт</span>
+                <div class="filter__toggler"></div>
+              </div>
+
+              <div class="filter__content">
+                <ul class="filter__list">
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="SIM_count" id="1sim">
+                    <label class="filter__label" for="1sim">1</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="SIM_count" id="2sim">
+                    <label class="filter__label" for="2sim">2</label>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="filter">
+              <div class="filter__description">
+                <span class="filter__name">Безопасность</span>
+                <div class="filter__toggler"></div>
+              </div>
+
+              <div class="filter__content">
+                <ul class="filter__list">
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="security" id="touchID">
+                    <label class="filter__label" for="touchID">Сканер отпечатка пальца</label>
+                  </li>
+                  <li class="filter__item">
+                    <input class="filter__checkbox" type="checkbox" name="security" id="faceID">
+                    <label class="filter__label" for="faceID">Сканер лица</label>
+                  </li>
+                </ul>
               </div>
             </li>
           </ul>
