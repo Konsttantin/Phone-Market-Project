@@ -2,7 +2,7 @@
 
 const filters = document.querySelector('.filters');
 const sortOptions = document.querySelector('.sort-options');
-const productHeart = document.querySelector('.product-card__icon');
+const products = document.querySelector('.products');
 let currentSortOption = document.getElementById('default');
 
 filters.addEventListener('click', (e) => {
@@ -24,8 +24,9 @@ sortOptions.addEventListener('click', (e) => {
   }
 });
 
-productHeart.addEventListener('click', (e) => {
-  if (e.target.closest('.product-card__icon')) {
-    productHeart.classList.toggle('active');
+products.addEventListener('click', (e) => {
+  const heart = e.target.closest('.product-card__icon');
+  if (heart) {
+    heart.classList.toggle('active');
   }
 });

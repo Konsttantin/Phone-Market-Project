@@ -82,7 +82,7 @@
     height: 4rem;
 
     &--heart:hover {
-      color: #e90000;
+      color: $red-heart-color;
     }
 
     &--basket:hover {
@@ -486,7 +486,7 @@
     color: #fff;
 
     &:hover {
-      color: #e90000;
+      color: $red-heart-color;
     }
 
     .animatedSvg {
@@ -496,7 +496,7 @@
     }
 
     &.active {
-      color: #e90000;
+      color: $red-heart-color;
     }
   }
 }
