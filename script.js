@@ -2,6 +2,7 @@
 
 const filters = document.querySelector('.filters');
 const sortOptions = document.querySelector('.sort-options');
+const productHeart = document.querySelector('.product-card__icon');
 let currentSortOption = document.getElementById('default');
 
 filters.addEventListener('click', (e) => {
@@ -20,5 +21,11 @@ sortOptions.addEventListener('click', (e) => {
     sortOption.classList.toggle('active');
 
     currentSortOption = sortOption;
+  }
+});
+
+productHeart.addEventListener('click', (e) => {
+  if (e.target.closest('.product-card__icon')) {
+    productHeart.classList.toggle('active');
   }
 });
