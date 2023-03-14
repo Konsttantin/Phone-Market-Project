@@ -115,6 +115,7 @@ input[type=number] {
 /* ---------- MAIN SECTION ---------- */
 .main {
   height: max-content;
+  margin-bottom: 100px;
 }
 .main__header {
   font-size: 3.5rem;
@@ -421,6 +422,26 @@ input[type=number] {
   margin-left: 5px;
   color: #000;
   font-size: 1.5rem;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  background: rgb(66, 66, 66);
+  background: linear-gradient(0deg, rgb(66, 66, 66) 0%, rgb(247, 248, 249) 100%);
+}
+.footer__link {
+  font-family: "Rampart One", cursive;
+  font-weight: bold;
+  font-size: 5rem;
+  transition: all 0.2s ease;
+}
+.footer__link:hover {
+  color: #fff;
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
 }
 
 /*# sourceMappingURL=styles.css.map */
