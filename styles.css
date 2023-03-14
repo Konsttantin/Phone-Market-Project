@@ -114,7 +114,7 @@ input[type=number] {
 
 /* ---------- MAIN SECTION ---------- */
 .main {
-  height: 200vh;
+  height: max-content;
 }
 .main__header {
   font-size: 3.5rem;
@@ -124,7 +124,7 @@ input[type=number] {
   display: flex;
   justify-content: space-between;
   gap: 5px;
-  height: 100%;
+  height: max-content;
 }
 .main__content {
   display: flex;

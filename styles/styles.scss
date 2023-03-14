@@ -104,7 +104,7 @@
 /* ---------- MAIN SECTION ---------- */
 
 .main {
-  height: 200vh;
+  height: max-content;
 
   &__header {
     font-size: 3.5rem;
@@ -116,7 +116,7 @@
     justify-content: space-between;
     gap: 5px;
 
-    height: 100%;
+    height: max-content;
   }
 
   &__content {

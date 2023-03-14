@@ -5,7 +5,8 @@ import { goods } from "./goods.js";
 const filters = document.querySelector('.filters');
 const sortOptions = document.querySelector('.sort-options');
 const products = document.querySelector('.products');
-let currentSortOption = document.getElementById('default');
+
+let currentSortOption = document.getElementById('default'); // stores state of sort buttons
 
 // Opening/closing filters
 
@@ -17,7 +18,7 @@ filters.addEventListener('click', (e) => {
   }
 });
 
-// Switching styles of filter buttons
+// Handling sort buttons
 
 sortOptions.addEventListener('click', (e) => {
   const sortOption = e.target.closest('.sort-options__item');
@@ -27,19 +28,43 @@ sortOptions.addEventListener('click', (e) => {
     sortOption.classList.toggle('active');
 
     currentSortOption = sortOption;
+
+    sortProducts(goods, sortOption.dataset.option, sortOption.id === 'price-asc');
   }
 });
+
+// Sorting any list
+
+function sortProducts(list, option, asc) {
+  const sorted = [...list];
+
+  if (!option) {
+    renderProducts(goods);
+  }
+
+  sorted.sort((a, b) => {
+    if (asc) {
+      return a[option] - b[option];
+    }
+
+    return b[option] - a[option];
+  });
+
+  renderProducts(sorted);
+}
 
 // Toggling state of heart button in product card
 
 products.addEventListener('click', (e) => {
+  e.preventDefault();
+
   const heart = e.target.closest('.product-card__icon');
   if (heart) {
     heart.classList.toggle('active');
   }
 });
 
-function render(arr) {
+function renderProducts(arr) {
   const products = document.querySelector('.products');
 
   products.innerHTML = '';
@@ -140,4 +165,4 @@ function convertPrice(price) {
   return result;
 }
 
-render(goods);
+renderProducts(goods);
