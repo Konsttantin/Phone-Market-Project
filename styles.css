@@ -115,6 +115,7 @@ input[type=number] {
 /* ---------- MAIN SECTION ---------- */
 .main {
   height: max-content;
+  min-height: calc(100vh - 8rem - 150px - 100px);
   margin-bottom: 100px;
 }
 .main__header {

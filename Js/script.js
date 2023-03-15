@@ -10,12 +10,10 @@ let currentSortOption = document.getElementById('default'); // stores state of s
 
 let currentProducts = [...goods];
 
-const filterParams = {
+const filterOptions = {
   min: getMinPrice(currentProducts),
   max: getMaxPrice(currentProducts),
 };
-
-// console.log(filterParams);
 
 function getMaxPrice(arr) {
   return Math.max(...arr.map(el => el.price));
@@ -25,15 +23,23 @@ function getMinPrice(arr) {
   return Math.min(...arr.map(el => el.price));
 }
 
-function setMinMaxPrices(params) {
+function setMinMaxPrices(rule) {
   const min = document.querySelector('[data-limit="min"]');
   const max = document.querySelector('[data-limit="max"]');
+
+  switch (rule) {
+    case 'min':
+      min.value = getMinPrice(currentProducts);
+      return;
+
+    case 'max':
+      max.value = getMaxPrice(currentProducts);
+      return;
+  }
 
   min.value = getMinPrice(currentProducts);
   max.value = getMaxPrice(currentProducts);
 }
-
-setMinMaxPrices(filterParams);
 
 // Opening/closing filters
 
@@ -69,16 +75,21 @@ function setFilterParam(input, param) {
     const limit = input.dataset.limit;
 
     priceTimeout = setTimeout(() => {
-      filterParams[limit] = +input.value;
-      filterList(filterParams);
+      if (!input.value.length) {
+        setMinMaxPrices(limit);
+        return;
+      }
+
+      filterOptions[limit] = +input.value;
+
       renderProducts(currentProducts);
-    }, 2000);
+    }, 500);
   }
 }
 
-function filterList(params) {
+function filterProducts(params) {
   currentProducts = goods.filter(product => {
-    if (product.price < filterParams.min || product.price > filterParams.max) {
+    if (product.price < params.min || product.price > params.max) {
       return false;
     }
 
@@ -97,22 +108,20 @@ sortOptions.addEventListener('click', (e) => {
 
     currentSortOption = sortOption;
 
-    sortProducts(currentProducts, sortOption.dataset.option, sortOption.id === 'price-asc');
+    sortProducts(sortOption.dataset.option, sortOption.id === 'price-asc');
   }
 });
 
 // Sorting any list
 
-function sortProducts(list, option, asc) {
-  const sorted = [...list];
-
+function sortProducts(option, asc) {
   if (!option) {
-    sorted.sort((a, b) => a.id - b.id);
+    goods.sort((a, b) => a.id - b.id);
 
-    return renderProducts(sorted);
+    return renderProducts(currentProducts);
   }
 
-  sorted.sort((a, b) => {
+  goods.sort((a, b) => {
     if (asc) {
       return a[option] - b[option];
     }
@@ -120,7 +129,7 @@ function sortProducts(list, option, asc) {
     return b[option] - a[option];
   });
 
-  renderProducts(sorted);
+  renderProducts(currentProducts);
 }
 
 // Toggling state of heart button in product card
@@ -135,12 +144,14 @@ products.addEventListener('click', (e) => {
   }
 });
 
-function renderProducts(arr) {
+function renderProducts() {
   const products = document.querySelector('.products');
 
   products.innerHTML = '';
 
-  arr.forEach(product => {
+  filterProducts(filterOptions);
+
+  currentProducts.forEach(product => {
     products.insertAdjacentHTML('beforeend', `
       <div class="product-card">
         <a class="product-card__image-link" href="#">
@@ -237,3 +248,4 @@ function convertPrice(price) {
 }
 
 renderProducts(currentProducts);
+setMinMaxPrices();

@@ -105,6 +105,7 @@
 
 .main {
   height: max-content;
+  min-height: calc(100vh - $header-height - $footer-height - 100px);
 
   margin-bottom: 100px;
 
@@ -550,7 +551,7 @@
   justify-content: center;
   align-items: center;
 
-  height: 150px;
+  height: $footer-height;
   background: rgb(66,66,66);
   background: linear-gradient(0deg, rgba(66,66,66,1) 0%, rgba(247,248,249,1) 100%);
 
