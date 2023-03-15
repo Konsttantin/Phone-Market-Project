@@ -13,7 +13,7 @@ export const goods = [
     prod: 'APPLE',
     security: ['face']
   },
-  
+
   {
     id: 2,
     name: 'Apple iPhone 14 Pro Max 1TB Space Black',

@@ -53,11 +53,11 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content">
+              <div class="filter__content" data-param="price">
                 <div class="price-container">
-                  <input type="number" class="price">
+                  <input type="number" class="price" data-limit="min">
                   <div class="delimiter"></div>
-                  <input type="number" class="price">
+                  <input type="number" class="price" data-limit="max">
                 </div>
               </div>
             </li>
@@ -68,18 +68,18 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content">
+              <div class="filter__content" data-param="prod">
                 <ul class="filter__list">
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="brand" id="SAMSUNG">
+                    <input class="filter__checkbox" type="checkbox" name="brand" id="SAMSUNG" value="SAMSUNG">
                     <label class="filter__label" for="SAMSUNG">SAMSUNG</label>
                   </li>
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="brand" id="APPLE">
+                    <input class="filter__checkbox" type="checkbox" name="brand" id="APPLE" value="APPLE">
                     <label class="filter__label" for="APPLE">APPLE</label>
                   </li>
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="brand" id="TECNO">
+                    <input class="filter__checkbox" type="checkbox" name="brand" id="TECNO" value="TECNO">
                     <label class="filter__label" for="TECNO">TECNO</label>
                   </li>
                 </ul>
@@ -92,7 +92,7 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content">
+              <div class="filter__content" data-param="memory">
                 <ul class="filter__list">
                   <li class="filter__item">
                     <input class="filter__checkbox" type="checkbox" name="volume" id="64gb">
@@ -120,7 +120,7 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content">
+              <div class="filter__content" data-param="ram">
                 <ul class="filter__list">
                   <li class="filter__item">
                     <input class="filter__checkbox" type="checkbox" name="ram" id="2ram">
@@ -156,7 +156,7 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content">
+              <div class="filter__content" data-param="sim">
                 <ul class="filter__list">
                   <li class="filter__item">
                     <input class="filter__checkbox" type="checkbox" name="SIM_count" id="1sim">
@@ -176,7 +176,7 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content">
+              <div class="filter__content" data-param="security">
                 <ul class="filter__list">
                   <li class="filter__item">
                     <input class="filter__checkbox" type="checkbox" name="security" id="touchID">
