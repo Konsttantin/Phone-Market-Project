@@ -53,7 +53,7 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content" data-param="price">
+              <div class="filter__content" data-option="price">
                 <div class="price-container">
                   <input type="number" class="price" data-limit="min">
                   <div class="delimiter"></div>
@@ -68,7 +68,7 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content" data-param="prod">
+              <div class="filter__content" data-option="prod">
                 <ul class="filter__list">
                   <li class="filter__item">
                     <input class="filter__checkbox" type="checkbox" name="brand" id="SAMSUNG" value="SAMSUNG">
@@ -92,22 +92,22 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content" data-param="memory">
+              <div class="filter__content" data-option="memory">
                 <ul class="filter__list">
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="volume" id="64gb">
+                    <input class="filter__checkbox" type="checkbox" name="volume" id="64gb" value="64">
                     <label class="filter__label" for="64gb">64 ГБ</label>
                   </li>
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="volume" id="128gb">
+                    <input class="filter__checkbox" type="checkbox" name="volume" id="128gb" value="128">
                     <label class="filter__label" for="128gb">128 ГБ</label>
                   </li>
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="volume" id="256gb">
+                    <input class="filter__checkbox" type="checkbox" name="volume" id="256gb" value="256">
                     <label class="filter__label" for="256gb">256 ГБ</label>
                   </li>
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="volume" id="512gb">
+                    <input class="filter__checkbox" type="checkbox" name="volume" id="512gb" value="512">
                     <label class="filter__label" for="512gb">512 ГБ</label>
                   </li>
                 </ul>
@@ -120,30 +120,26 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content" data-param="ram">
+              <div class="filter__content" data-option="ram">
                 <ul class="filter__list">
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="ram" id="2ram">
-                    <label class="filter__label" for="2ram">2 ГБ</label>
-                  </li>
-                  <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="ram" id="3ram">
+                    <input class="filter__checkbox" type="checkbox" name="ram" id="3ram" value="3">
                     <label class="filter__label" for="3ram">3 ГБ</label>
                   </li>
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="ram" id="4ram">
+                    <input class="filter__checkbox" type="checkbox" name="ram" id="4ram" value="4">
                     <label class="filter__label" for="4ram">4 ГБ</label>
                   </li>
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="ram" id="6ram">
+                    <input class="filter__checkbox" type="checkbox" name="ram" id="6ram" value="6">
                     <label class="filter__label" for="6ram">6 ГБ</label>
                   </li>
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="ram" id="8ram">
+                    <input class="filter__checkbox" type="checkbox" name="ram" id="8ram" value="8">
                     <label class="filter__label" for="8ram">8 ГБ</label>
                   </li>
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="ram" id="12ram">
+                    <input class="filter__checkbox" type="checkbox" name="ram" id="12ram" value="12">
                     <label class="filter__label" for="12ram">12 ГБ</label>
                   </li>
                 </ul>
@@ -156,14 +152,14 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content" data-param="sim">
+              <div class="filter__content" data-option="sim">
                 <ul class="filter__list">
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="SIM_count" id="1sim">
+                    <input class="filter__checkbox" type="checkbox" name="SIM_count" id="1sim" value="1">
                     <label class="filter__label" for="1sim">1</label>
                   </li>
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="SIM_count" id="2sim">
+                    <input class="filter__checkbox" type="checkbox" name="SIM_count" id="2sim" value="2">
                     <label class="filter__label" for="2sim">2</label>
                   </li>
                 </ul>
@@ -176,14 +172,15 @@
                 <div class="filter__toggler"></div>
               </div>
 
-              <div class="filter__content" data-param="security">
+              <div class="filter__content" data-option="security">
                 <ul class="filter__list">
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="security" id="touchID">
+                    <input class="filter__checkbox" type="checkbox" name="security" id="touchID" value="touch">
                     <label class="filter__label" for="touchID">Сканер отпечатка пальца</label>
                   </li>
+
                   <li class="filter__item">
-                    <input class="filter__checkbox" type="checkbox" name="security" id="faceID">
+                    <input class="filter__checkbox" type="checkbox" name="security" id="faceID" value="face">
                     <label class="filter__label" for="faceID">Сканер лица</label>
                   </li>
                 </ul>
@@ -191,7 +188,7 @@
             </li>
           </ul>
         </aside>
-        
+
         <div class="main__content">
           <div class="sort-options">
             <span class="sort-options__description">Отсортировать по:</span>

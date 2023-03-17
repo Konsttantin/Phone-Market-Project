@@ -1,4 +1,4 @@
-export const goods = [
+export const initialProducts = [
   {
     id: 1,
     name: 'Apple iPhone 11 128GB Black',

@@ -1,6 +1,6 @@
 'use strict'
 
-import { goods } from "./goods.js";
+import { initialProducts } from "./initialProducts.js";
 
 const filters = document.querySelector('.filters');
 const sortOptions = document.querySelector('.sort-options');
@@ -8,40 +8,43 @@ const products = document.querySelector('.products');
 
 let currentSortOption = document.getElementById('default'); // stores state of sort buttons
 
-let currentProducts = [...goods];
+let currentProducts = [...initialProducts]; // contains actual product-objects
 
 const filterOptions = {
-  min: getMinPrice(currentProducts),
-  max: getMaxPrice(currentProducts),
-};
+  min: getLimitPrice(initialProducts, 'min'),
+  max: getLimitPrice(initialProducts, 'max'),
+  memory: [],
+  ram: [],
+  sim: [],
+  prod: [],
+  security: [],
+}; // object contains options for filtration products
 
-function getMaxPrice(arr) {
-  return Math.max(...arr.map(el => el.price));
-}
+function getLimitPrice(arr, limit) {
+  if (limit === 'max') {
+    return Math.max(...arr.map(el => el.price));
+  }
 
-function getMinPrice(arr) {
   return Math.min(...arr.map(el => el.price));
 }
 
-function setMinMaxPrices(rule) {
+function setLimitPrices(arr, limit) {
   const min = document.querySelector('[data-limit="min"]');
   const max = document.querySelector('[data-limit="max"]');
 
-  switch (rule) {
+  switch (limit) {
     case 'min':
-      min.value = getMinPrice(currentProducts);
+      min.value = getLimitPrice(arr, limit);
       return;
 
     case 'max':
-      max.value = getMaxPrice(currentProducts);
+      max.value = getLimitPrice(arr, limit);
       return;
   }
 
-  min.value = getMinPrice(currentProducts);
-  max.value = getMaxPrice(currentProducts);
-}
-
-// Opening/closing filters
+  min.value = getLimitPrice(currentProducts, 'min');
+  max.value = getLimitPrice(currentProducts, 'max');
+} // sets min and max values to price filter inputs
 
 filters.addEventListener('click', (e) => {
   const description = e.target.closest('.filter__description');
@@ -49,55 +52,82 @@ filters.addEventListener('click', (e) => {
   if (description) {
     description.classList.toggle('active');
   }
-});
+}); // Opening/closing filters
 
-// Filtering by prices
-
-let priceTimeout = null;
+// ---------- FILTERING ----------
 
 filters.addEventListener('input', (e) => {
   const filter = e.target.closest('.filter__content');
   const input = e.target;
 
-  // console.log(input.value, input.checked)
-
   if (!filter) {
     return;
   }
 
-  setFilterParam(input, filter.dataset.param);
-});
+  setFilterOptions(input, filter.dataset.option);
+}); // Handling filter input
 
-function setFilterParam(input, param) {
-  if (param === 'price') {
+let priceTimeout = null;
+
+function setFilterOptions(input, option) {
+  let value = +input.value || input.value;
+
+  if (option === 'price') {
     clearTimeout(priceTimeout);
 
     const limit = input.dataset.limit;
 
     priceTimeout = setTimeout(() => {
       if (!input.value.length) {
-        setMinMaxPrices(limit);
-        return;
+        setLimitPrices(initialProducts, limit);
+
+        filterOptions[limit] = getLimitPrice(initialProducts, limit);
+        return renderProducts();
       }
 
-      filterOptions[limit] = +input.value;
+      filterOptions[limit] = value;
 
-      renderProducts(currentProducts);
-    }, 500);
+      renderProducts();
+    }, 1000);
+
+    return;
   }
-}
 
-function filterProducts(params) {
-  currentProducts = goods.filter(product => {
-    if (product.price < params.min || product.price > params.max) {
+  const optionArr = filterOptions[option];
+  const valueIndex = optionArr.indexOf(value);
+
+  input.checked
+    ? optionArr.push(value)
+    : optionArr.splice(valueIndex, 1)
+
+  console.log(optionArr, valueIndex);
+  renderProducts();
+} 
+
+function filterProducts(options) {
+  currentProducts = initialProducts.filter(product => {
+    if (product.price < options.min || product.price > options.max) {
       return false;
+    }
+
+    for (const key in options) {
+      const mustBe = options[key];
+      const currentValue = product[key];
+
+      if (mustBe.length && Array.isArray(currentValue)) {
+        return mustBe.some(el => currentValue.includes(el));
+      }
+
+      if (mustBe.length && !mustBe.includes(currentValue)) {
+        return false;
+      }
     }
 
     return true;
   });
-}
+} // filtering initial products due to filterOptions object properties
 
-// Handling sort buttons
+// ---------- SORTING ----------
 
 sortOptions.addEventListener('click', (e) => {
   const sortOption = e.target.closest('.sort-options__item');
@@ -110,18 +140,16 @@ sortOptions.addEventListener('click', (e) => {
 
     sortProducts(sortOption.dataset.option, sortOption.id === 'price-asc');
   }
-});
-
-// Sorting any list
+}); // Handling sort buttons
 
 function sortProducts(option, asc) {
   if (!option) {
-    goods.sort((a, b) => a.id - b.id);
+    initialProducts.sort((a, b) => a.id - b.id);
 
-    return renderProducts(currentProducts);
+    return renderProducts();
   }
 
-  goods.sort((a, b) => {
+  initialProducts.sort((a, b) => {
     if (asc) {
       return a[option] - b[option];
     }
@@ -129,10 +157,8 @@ function sortProducts(option, asc) {
     return b[option] - a[option];
   });
 
-  renderProducts(currentProducts);
-}
-
-// Toggling state of heart button in product card
+  renderProducts();
+} // Sorting any list
 
 products.addEventListener('click', (e) => {
   e.preventDefault();
@@ -142,7 +168,7 @@ products.addEventListener('click', (e) => {
   if (heart) {
     heart.classList.toggle('active');
   }
-});
+}); // Toggling state of heart button in product card
 
 function renderProducts() {
   const products = document.querySelector('.products');
@@ -247,5 +273,5 @@ function convertPrice(price) {
   return result;
 }
 
-renderProducts(currentProducts);
-setMinMaxPrices();
+renderProducts();
+setLimitPrices();
