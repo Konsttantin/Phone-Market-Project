@@ -40,6 +40,10 @@ input[type=number] {
   margin: 0;
 }
 
+button {
+  all: unset;
+}
+
 .container {
   max-width: 1600px;
   height: 100%;
@@ -115,8 +119,8 @@ input[type=number] {
 /* ---------- MAIN SECTION ---------- */
 .main {
   height: max-content;
-  min-height: calc(100vh - 8rem - 150px - 100px);
-  margin-bottom: 100px;
+  min-height: calc(100vh - 8rem - 150px);
+  padding-bottom: 50px;
 }
 .main__header {
   font-size: 3.5rem;
@@ -134,6 +138,35 @@ input[type=number] {
   gap: 5px;
   height: 100%;
   flex-grow: 1;
+}
+.main__pagination {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.main__pagination.active {
+  display: flex;
+}
+.main__pagination-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 30px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px #BDBFC0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.main__pagination-button:hover {
+  color: #fff;
+  background-color: #060606;
+  box-shadow: px 4px 5px #BDBFC0;
 }
 
 /* ----- filters ----- */
@@ -313,6 +346,7 @@ input[type=number] {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 10px;
   height: max-content;
+  margin-bottom: 10px;
 }
 
 /* ----- product card ----- */

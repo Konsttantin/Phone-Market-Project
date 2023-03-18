@@ -5,6 +5,7 @@ import { initialProducts } from "./initialProducts.js";
 const filters = document.querySelector('.filters');
 const sortOptions = document.querySelector('.sort-options');
 const products = document.querySelector('.products');
+const pagination = document.querySelector('.main__pagination');
 
 let currentSortOption = document.getElementById('default'); // stores state of sort buttons
 
@@ -18,7 +19,48 @@ const filterOptions = {
   sim: [],
   prod: [],
   security: [],
+
+  setOptions(input, option) {
+    let value = +input.value || input.value;
+
+    if (option === 'price') {
+      clearTimeout(this.timeout);
+
+      const limit = input.dataset.limit;
+
+      this.timeout = setTimeout(() => {
+        if (!input.value.length) {
+          setLimitPrices(initialProducts, limit);
+
+          this[limit] = getLimitPrice(initialProducts, limit);
+          return renderProducts();
+        }
+
+        this[limit] = value;
+
+        renderProducts();
+      }, 1000);
+
+      return;
+    }
+
+    const optionArr = this[option];
+    const valueIndex = optionArr.indexOf(value);
+    
+    input.checked
+    ? optionArr.push(value)
+    : optionArr.splice(valueIndex, 1)
+
+    renderProducts();
+  }, // setting options to filterOptions object
+
+  timeout: null,
 }; // object contains options for filtration products
+
+Object.defineProperties(filterOptions, {
+  setOptions: { enumerable: false },
+  timeout: { enumerable: false },
+});
 
 function getLimitPrice(arr, limit) {
   if (limit === 'max') {
@@ -26,7 +68,7 @@ function getLimitPrice(arr, limit) {
   }
 
   return Math.min(...arr.map(el => el.price));
-}
+} // get max or min price of products in given array
 
 function setLimitPrices(arr, limit) {
   const min = document.querySelector('[data-limit="min"]');
@@ -64,45 +106,8 @@ filters.addEventListener('input', (e) => {
     return;
   }
 
-  setFilterOptions(input, filter.dataset.option);
+  filterOptions.setOptions(input, filter.dataset.option);
 }); // Handling filter input
-
-let priceTimeout = null;
-
-function setFilterOptions(input, option) {
-  let value = +input.value || input.value;
-
-  if (option === 'price') {
-    clearTimeout(priceTimeout);
-
-    const limit = input.dataset.limit;
-
-    priceTimeout = setTimeout(() => {
-      if (!input.value.length) {
-        setLimitPrices(initialProducts, limit);
-
-        filterOptions[limit] = getLimitPrice(initialProducts, limit);
-        return renderProducts();
-      }
-
-      filterOptions[limit] = value;
-
-      renderProducts();
-    }, 1000);
-
-    return;
-  }
-
-  const optionArr = filterOptions[option];
-  const valueIndex = optionArr.indexOf(value);
-
-  input.checked
-    ? optionArr.push(value)
-    : optionArr.splice(valueIndex, 1)
-
-  console.log(optionArr, valueIndex);
-  renderProducts();
-} 
 
 function filterProducts(options) {
   currentProducts = initialProducts.filter(product => {
@@ -113,7 +118,8 @@ function filterProducts(options) {
     for (const key in options) {
       const mustBe = options[key];
       const currentValue = product[key];
-
+      console.log(mustBe);
+      
       if (mustBe.length && Array.isArray(currentValue)) {
         return mustBe.some(el => currentValue.includes(el));
       }
@@ -125,7 +131,7 @@ function filterProducts(options) {
 
     return true;
   });
-} // filtering initial products due to filterOptions object properties
+} // filtering initial products due to object with filter properties
 
 // ---------- SORTING ----------
 
@@ -170,14 +176,33 @@ products.addEventListener('click', (e) => {
   }
 }); // Toggling state of heart button in product card
 
+let renderLimit = 8; // limits the count of products rendered
+
+pagination.addEventListener('click', (e) => {
+  if (!e.target.closest('.main__pagination-button')) {
+    return;
+  }
+
+  if (renderLimit < currentProducts.length) {
+    renderLimit += 8;
+  }
+
+  renderProducts();
+}); // handling pagination button (increase render limit)
+
 function renderProducts() {
   const products = document.querySelector('.products');
 
   products.innerHTML = '';
 
   filterProducts(filterOptions);
+  updatePagination();
 
-  currentProducts.forEach(product => {
+  currentProducts.forEach((product, i) => {
+    if (i >= renderLimit) {
+      return;
+    }
+
     products.insertAdjacentHTML('beforeend', `
       <div class="product-card">
         <a class="product-card__image-link" href="#">
@@ -230,7 +255,17 @@ function renderProducts() {
       </div>
     `)
   })
-};
+}; // rendering products due to current sorting and filtering
+
+function updatePagination() {
+  if (renderLimit < currentProducts.length && !pagination.classList.contains('active')) {
+    pagination.classList.add('active');
+  }
+
+  if (renderLimit >= currentProducts.length) {
+    pagination.classList.remove('active');
+  }
+} // updates pagination button state
 
 function getStars(rating) {
   let result = ``;
@@ -248,7 +283,7 @@ function getStars(rating) {
   }
 
   return result;
-}
+} // get count of rating stars
 
 function convertPrice(price) {
   const priceStr = String(price);
@@ -271,7 +306,7 @@ function convertPrice(price) {
   }
 
   return result;
-}
+} // converting price from number to spaced string
 
 renderProducts();
 setLimitPrices();
