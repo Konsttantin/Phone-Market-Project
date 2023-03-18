@@ -166,7 +166,13 @@ button {
 .main__pagination-button:hover {
   color: #fff;
   background-color: #060606;
-  box-shadow: px 4px 5px #BDBFC0;
+  box-shadow: 0px 4px 5px #BDBFC0;
+}
+
+.goods-counter {
+  font-size: 1.7rem;
+  font-weight: normal;
+  color: #888;
 }
 
 /* ----- filters ----- */

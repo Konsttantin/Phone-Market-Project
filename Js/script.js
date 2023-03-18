@@ -6,6 +6,7 @@ const filters = document.querySelector('.filters');
 const sortOptions = document.querySelector('.sort-options');
 const products = document.querySelector('.products');
 const pagination = document.querySelector('.main__pagination');
+const searchBar = document.querySelector('.header__field');
 
 let currentSortOption = document.getElementById('default'); // stores state of sort buttons
 
@@ -19,6 +20,8 @@ const filterOptions = {
   sim: [],
   prod: [],
   security: [],
+
+  searchRequest: '',
 
   setOptions(input, option) {
     let value = +input.value || input.value;
@@ -52,7 +55,7 @@ const filterOptions = {
     : optionArr.splice(valueIndex, 1)
 
     renderProducts();
-  }, // setting options to filterOptions object
+  }, // set options to filterOptions object
 
   timeout: null,
 }; // object contains options for filtration products
@@ -60,6 +63,7 @@ const filterOptions = {
 Object.defineProperties(filterOptions, {
   setOptions: { enumerable: false },
   timeout: { enumerable: false },
+  searchRequest: { enumerable: false },
 });
 
 function getLimitPrice(arr, limit) {
@@ -86,7 +90,7 @@ function setLimitPrices(arr, limit) {
 
   min.value = getLimitPrice(currentProducts, 'min');
   max.value = getLimitPrice(currentProducts, 'max');
-} // sets min and max values to price filter inputs
+} // set min and max values to price filter inputs
 
 filters.addEventListener('click', (e) => {
   const description = e.target.closest('.filter__description');
@@ -94,7 +98,25 @@ filters.addEventListener('click', (e) => {
   if (description) {
     description.classList.toggle('active');
   }
-}); // Opening/closing filters
+}); // Open/close filters
+
+// ---------- SEARCHING ----------
+
+searchBar.addEventListener('input', searchProduct);
+
+function searchProduct(event) {
+  clearTimeout(searchProduct.timeout);
+
+  const value = event.target.value.trim();
+
+  searchProduct.timeout = setTimeout(() => {
+    filterOptions.searchRequest = value;
+
+    renderProducts();
+  }, 1000);
+} // handler for searchbar
+
+searchProduct.timeout = null;
 
 // ---------- FILTERING ----------
 
@@ -107,7 +129,7 @@ filters.addEventListener('input', (e) => {
   }
 
   filterOptions.setOptions(input, filter.dataset.option);
-}); // Handling filter input
+}); // Handle filter input
 
 function filterProducts(options) {
   currentProducts = initialProducts.filter(product => {
@@ -118,8 +140,7 @@ function filterProducts(options) {
     for (const key in options) {
       const mustBe = options[key];
       const currentValue = product[key];
-      console.log(mustBe);
-      
+
       if (mustBe.length && Array.isArray(currentValue)) {
         return mustBe.some(el => currentValue.includes(el));
       }
@@ -131,7 +152,24 @@ function filterProducts(options) {
 
     return true;
   });
-} // filtering initial products due to object with filter properties
+
+  if (options.searchRequest) {
+    currentProducts = currentProducts.filter(product => {
+      const name = product.name.toLowerCase();
+      const request = options.searchRequest.toLowerCase().split(' ');
+
+      return request.every(word => {
+        if (name.startsWith(word)) {
+          return true;
+        }
+
+        if (name.includes(word)) {
+          return true;
+        }
+      })
+    })
+  }
+} // filter initial products due to object with filter properties
 
 // ---------- SORTING ----------
 
@@ -146,7 +184,7 @@ sortOptions.addEventListener('click', (e) => {
 
     sortProducts(sortOption.dataset.option, sortOption.id === 'price-asc');
   }
-}); // Handling sort buttons
+}); // Handle sort buttons
 
 function sortProducts(option, asc) {
   if (!option) {
@@ -164,7 +202,7 @@ function sortProducts(option, asc) {
   });
 
   renderProducts();
-} // Sorting any list
+} // Sort any list
 
 products.addEventListener('click', (e) => {
   e.preventDefault();
@@ -174,9 +212,9 @@ products.addEventListener('click', (e) => {
   if (heart) {
     heart.classList.toggle('active');
   }
-}); // Toggling state of heart button in product card
+}); // Toggle state of heart button in product card
 
-let renderLimit = 8; // limits the count of products rendered
+let renderLimit = 8; // limit the count of products rendered
 
 pagination.addEventListener('click', (e) => {
   if (!e.target.closest('.main__pagination-button')) {
@@ -188,20 +226,17 @@ pagination.addEventListener('click', (e) => {
   }
 
   renderProducts();
-}); // handling pagination button (increase render limit)
+}); // handle pagination button (increase render limit)
 
 function renderProducts() {
-  const products = document.querySelector('.products');
-
   products.innerHTML = '';
 
   filterProducts(filterOptions);
+  setProductsCount();
   updatePagination();
 
-  currentProducts.forEach((product, i) => {
-    if (i >= renderLimit) {
-      return;
-    }
+  for (let i = 0; i < renderLimit; i++) {
+    const product = currentProducts[i];
 
     products.insertAdjacentHTML('beforeend', `
       <div class="product-card">
@@ -254,8 +289,27 @@ function renderProducts() {
         </div>
       </div>
     `)
-  })
-}; // rendering products due to current sorting and filtering
+  }
+}; // render products due to current sorting and filtering
+
+function setProductsCount() {
+  const counter = document.querySelector('.goods-counter');
+  const productsCount = String(currentProducts.length);
+
+  const wordEndings = {
+    'товаров': ['11', '12', '13', '14', '5', '6', '7', '8', '9', '0'],
+    'товара': ['2', '3', '4'],
+    'товар': ['1']
+  };
+
+  for (const ending in wordEndings) {
+    if (wordEndings[ending].some(end => productsCount.endsWith(end))) {
+      counter.innerHTML=`${productsCount} ${ending}`;
+
+      return;
+    }
+  }
+} // set count of current products
 
 function updatePagination() {
   if (renderLimit < currentProducts.length && !pagination.classList.contains('active')) {
@@ -265,7 +319,7 @@ function updatePagination() {
   if (renderLimit >= currentProducts.length) {
     pagination.classList.remove('active');
   }
-} // updates pagination button state
+} // update pagination button state
 
 function getStars(rating) {
   let result = ``;
@@ -306,7 +360,7 @@ function convertPrice(price) {
   }
 
   return result;
-} // converting price from number to spaced string
+} // convert price from number to spaced string
 
 renderProducts();
 setLimitPrices();

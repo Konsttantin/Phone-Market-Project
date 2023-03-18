@@ -436,7 +436,7 @@ export const initialProducts = [
 
   {
     id: 30,
-    name: 'Смартфон Samsung Galaxy A13 4/128GB (A135/128) Light Blue',
+    name: 'Samsung Galaxy A13 4/128GB (A135/128) Light Blue',
     img: 'https://img.moyo.ua/img/products/5143/46_200.jpg?1678802775',
     rating: 3,
     price: 8099,
@@ -481,7 +481,7 @@ export const initialProducts = [
 
   {
     id: 33,
-    name: 'Смартфон TECNO Camon 18p (CH7n) 8/128Gb NFC',
+    name: 'TECNO Camon 18p (CH7n) 8/128Gb NFC',
     img: 'https://img.moyo.ua/img/products/5047/77_200.jpg?1678802824',
     rating: 1,
     price: 8499,
@@ -511,7 +511,7 @@ export const initialProducts = [
 
   {
     id: 35,
-    name: 'Смартфон TECNO Camon 19 Neo (CH6i) 6/128Gb NFC 2SIM',
+    name: 'TECNO Camon 19 Neo (CH6i) 6/128Gb NFC 2SIM',
     img: 'https://img.moyo.ua/img/products/5151/50_200.jpeg?1678802763',
     rating: 5,
     price: 7699,
