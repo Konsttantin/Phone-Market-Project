@@ -235,7 +235,9 @@ function renderProducts() {
   setProductsCount();
   updatePagination();
 
-  for (let i = 0; i < renderLimit; i++) {
+  const iterationLimit = Math.min(renderLimit, currentProducts.length);
+
+  for (let i = 0; i < iterationLimit; i++) {
     const product = currentProducts[i];
 
     products.insertAdjacentHTML('beforeend', `
