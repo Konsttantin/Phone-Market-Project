@@ -13,6 +13,7 @@ html {
 
 body {
   position: relative;
+  overflow-x: hidden;
   background-color: #F7F8F9;
 }
 
@@ -56,7 +57,7 @@ button {
   top: 0;
   background-color: #fcfcfc;
   box-shadow: 0px 0px 15px 0px rgba(61, 61, 61, 0.3);
-  z-index: 10;
+  z-index: 5;
 }
 .header__container {
   display: flex;
@@ -114,6 +115,115 @@ button {
   color: currentColor;
   fill: currentColor;
   transition: all 0.3s ease;
+}
+
+.basket {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 10px;
+  top: calc(8rem + 15px);
+  transform: translateX(110%);
+  width: 700px;
+  height: 300px;
+  padding: 15px;
+  border-radius: 20px;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease;
+  cursor: default;
+  user-select: none;
+}
+.basket.active {
+  transform: translateX(0);
+}
+.basket__title {
+  font-size: 2.5rem;
+  font-weight: normal;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #000;
+}
+.basket__content {
+  height: 300px;
+  padding: 5px;
+  background-color: #eee;
+}
+.basket__item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+}
+.basket__item-image {
+  height: 100px;
+}
+.basket__item-description {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 10px;
+  max-width: 200px;
+  padding-left: 5px;
+  padding-top: 10px;
+  color: #000;
+}
+.basket__item-title {
+  font-size: 1.7rem;
+  font-weight: normal;
+}
+.basket__item-price {
+  font-size: 1.6rem;
+}
+.basket__item-counter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+}
+.basket__item-counter .count-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 2rem;
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.basket__item-counter .count-button:hover {
+  background-color: #d5d5d5;
+}
+.basket__item-counter .count-button:active {
+  background-color: #aaa;
+}
+.basket__item-counter .count-button--plus {
+  background-image: url(./img/plus.png);
+}
+.basket__item-counter .count-button--minus {
+  background-image: url(./img/minus.png);
+}
+.basket__item-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 2rem;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+.basket__item-total {
+  padding: 10px;
+  font-size: 2rem;
+  color: #000;
 }
 
 /* ---------- MAIN SECTION ---------- */
