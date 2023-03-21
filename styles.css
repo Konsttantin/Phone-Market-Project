@@ -125,7 +125,7 @@ button {
   top: calc(8rem + 15px);
   transform: translateX(110%);
   width: 700px;
-  height: 300px;
+  height: max-content;
   padding: 15px;
   border-radius: 20px;
   z-index: 1;
@@ -138,25 +138,49 @@ button {
 .basket.active {
   transform: translateX(0);
 }
+.basket__header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #000;
+}
 .basket__title {
   font-size: 2.5rem;
   font-weight: normal;
   padding-bottom: 5px;
-  border-bottom: 1px solid #000;
+}
+.basket__clear {
+  position: relative;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.basket__clear.active::before {
+  background-image: url(./img/bin.gif);
+}
+.basket__clear::before {
+  content: "";
+  position: absolute;
+  left: -23px;
+  height: 20px;
+  width: 20px;
+  background-image: url(./img/bin-image.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .basket__content {
-  height: 300px;
+  height: max-content;
   padding: 5px;
-  background-color: #eee;
 }
 .basket__item {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
   overflow: hidden;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+}
+.basket__item:hover .basket__item-delete {
+  opacity: 1;
 }
 .basket__item-image {
   height: 100px;
@@ -221,9 +245,23 @@ button {
   border-radius: 5px;
 }
 .basket__item-total {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
   padding: 10px;
   font-size: 2rem;
   color: #000;
+}
+.basket__item-delete {
+  opacity: 0;
+  padding-right: 20px;
+  font-size: 4rem;
+  color: rgba(189, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.basket__item-delete:hover {
+  color: rgb(189, 0, 0);
 }
 
 /* ---------- MAIN SECTION ---------- */

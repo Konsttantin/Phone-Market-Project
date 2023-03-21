@@ -375,3 +375,14 @@ const basket = document.querySelector('.basket');
 basketIcon.addEventListener('click', () => {
   basket.classList.toggle('active');
 })
+
+const clear = document.querySelector('.basket__clear');
+
+clear.addEventListener('mouseover', (e) => {
+  e.target.classList.add('active');
+})
+
+clear.addEventListener("mouseout", (e) => {
+  e.target.classList.remove('active');
+});
+
