@@ -170,9 +170,24 @@
   }
 
   &__content {
+    display: none;
+
     height: max-content;
 
     padding: 5px;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  &__empty {
+    padding: 20px 0;
+
+    text-align: center;
+    font-size: 2.5rem;
+
+    color: #000;
   }
 
   &__item {
@@ -297,14 +312,43 @@
       font-size: 4rem;
       color: rgba(189, 0, 0, 0.5);
 
-      transition: all .2s ease;
+      transition: color .2s ease;
 
       cursor: pointer;
 
       &:hover {
-        color: rgba(189, 0, 0, 1);
+        color: #bd0000;
+      }
+
+      &:active {
+        color: lighten(#bd0000, 15);
+        transition: none;
       }
     }
+  }
+
+  &__footer {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+
+    border-top: 1px solid #000;
+    padding-top: 5px;
+
+    &.active {
+      display: flex;
+    }
+  }
+
+  &__total {
+    font-size: 2rem;
+    color: #000;
+  }
+
+  &__order-button {
+    padding: 10px 20px;
+
+    font-size: 1.8rem;
   }
 }
 
@@ -721,23 +765,25 @@
   }
 
   &__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-grow: 1;
 
-    border-radius: 10px;
+    max-width: 180px;
 
-    padding: 15px 60px;
+    padding: 15px 0;
 
-    color: #fff;
     font-size: 1.8rem;
 
-    background-color: #00ac45;
+    &.in-basket {
+      background-color: #0094b9;
 
-    transition: all .2s ease;
-
-    &:hover {
-      background-color: darken(#00ac45, 5%);
+      &:hover {
+        background-color: darken(#0094b9, 5%);
+      }
+    
+      &:active {
+        background-color: darken(#0094b9, 10%);
+        transition: none;
+      }
     }
   }
 

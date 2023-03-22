@@ -45,6 +45,23 @@ button {
   all: unset;
 }
 
+.buy-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #00ac45;
+  transition: all 0.2s ease;
+}
+.buy-button:hover {
+  background-color: #00933b;
+}
+.buy-button:active {
+  background-color: #007931;
+  transition: none;
+}
+
 .container {
   max-width: 1600px;
   height: 100%;
@@ -167,8 +184,18 @@ button {
   background-size: cover;
 }
 .basket__content {
+  display: none;
   height: max-content;
   padding: 5px;
+}
+.basket__content.active {
+  display: block;
+}
+.basket__empty {
+  padding: 20px 0;
+  text-align: center;
+  font-size: 2.5rem;
+  color: #000;
 }
 .basket__item {
   display: flex;
@@ -257,11 +284,33 @@ button {
   padding-right: 20px;
   font-size: 4rem;
   color: rgba(189, 0, 0, 0.5);
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
   cursor: pointer;
 }
 .basket__item-delete:hover {
-  color: rgb(189, 0, 0);
+  color: #bd0000;
+}
+.basket__item-delete:active {
+  color: #ff0b0b;
+  transition: none;
+}
+.basket__footer {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #000;
+  padding-top: 5px;
+}
+.basket__footer.active {
+  display: flex;
+}
+.basket__total {
+  font-size: 2rem;
+  color: #000;
+}
+.basket__order-button {
+  padding: 10px 20px;
+  font-size: 1.8rem;
 }
 
 /* ---------- MAIN SECTION ---------- */
@@ -557,18 +606,20 @@ button {
   width: 100%;
 }
 .product-card__button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  padding: 15px 60px;
-  color: #fff;
+  flex-grow: 1;
+  max-width: 180px;
+  padding: 15px 0;
   font-size: 1.8rem;
-  background-color: #00ac45;
-  transition: all 0.2s ease;
 }
-.product-card__button:hover {
-  background-color: #00933b;
+.product-card__button.in-basket {
+  background-color: #0094b9;
+}
+.product-card__button.in-basket:hover {
+  background-color: #0080a0;
+}
+.product-card__button.in-basket:active {
+  background-color: #006b86;
+  transition: none;
 }
 .product-card__icon {
   width: 40px;
