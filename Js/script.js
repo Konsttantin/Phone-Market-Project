@@ -379,13 +379,12 @@ initializePage();
 // TEST ZONE
 
 function initializePage() {
-  renderProducts();
-  setLimitPrices();
-
   if (!localStorage.getItem('basket')) {
     localStorage.setItem('basket', JSON.stringify([]));
   }
 
+  renderProducts();
+  setLimitPrices();
   renderBasket();
 }
 
