@@ -171,13 +171,23 @@
 
   &__content {
     display: none;
+    flex-direction: column;
+    gap: 5px;
 
     height: max-content;
 
     padding: 5px;
 
     &.active {
-      display: block;
+      display: flex;
+    }
+
+    &.active ~ .basket__footer {
+      display: flex;
+    }
+
+    &.active + .basket__empty {
+      display: none;
     }
   }
 
@@ -203,8 +213,24 @@
 
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
 
+    transition: all .1s ease;
+
+    &:hover {
+      transform: translateZ(0);
+      transform: scale(101%);
+    }
+
     &:hover .basket__item-delete {
       opacity: 1;
+    }
+
+    .basket__image-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items:stretch;
+
+      height: 100px;
+      width: 100px;
     }
 
     &-image {
@@ -873,4 +899,22 @@
             -1px -1px 0 #000;
     }
   }
+}
+
+// MAIN PART!!!!!!!!
+
+.rickroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  background-color: #000;
+  z-index: 99;
 }

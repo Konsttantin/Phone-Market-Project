@@ -217,7 +217,7 @@ products.addEventListener('click', (e) => {
     return;
   }
 
-  if (buyButton) {
+  if (!buyButton?.classList.contains('in-basket') && buyButton) {
     addToBasket(productCard.id);
   }
 }); // handling events on product cards
@@ -248,7 +248,7 @@ function renderProducts() {
   for (let i = 0; i < iterationLimit; i++) {
     const product = currentProducts[i];
 
-    const inBasket = getBasket().includes(String(product.id));
+    const inBasket = getBasket().some(prod => +prod.id === product.id);
 
     products.insertAdjacentHTML('beforeend', `
       <div class="product-card" id="${ product.id }">
@@ -385,34 +385,37 @@ function initializePage() {
   if (!localStorage.getItem('basket')) {
     localStorage.setItem('basket', JSON.stringify([]));
   }
+
+  renderBasket();
 }
 
-document.body.addEventListener('click', (e) => {
-  e.preventDefault();
+document.body.addEventListener('click', handleBasketState);
+
+function handleBasketState(e) {
   const buyButton = e.target.closest('.product-card__button');
+  const basketItem = e.target.closest('.basket__item');
   const basketIcon = e.target.closest('#basket-icon');
   const targetBasket = e.target.closest('.basket');
 
   if (basketIcon) {
-    console.log(1);
+    e.preventDefault();
     basket.classList.contains('active') ? closeBasket() : openBasket();
     return;
   }
 
   if (buyButton?.classList.contains('in-basket')) {
-    console.log(2);
     openBasket();
     return;
   }
 
-  if (buyButton) {
+  if (buyButton || basketItem) {
     return;
   }
 
   if (!targetBasket) {
     closeBasket();
   }
-})
+}
 
 function closeBasket() {
   if (basket.classList.contains('active')) {
@@ -424,37 +427,169 @@ function openBasket() {
   if (basket.classList.contains('active')) {
     return;
   }
-  
-  console.log(11);
+
   basket.classList.add('active');
 }
 
 function addToBasket(id) {
   const basket = getBasket();
 
-  basket.push(id);
+  const product = basket.find((el) => {
+    return el.id === id;
+  });
+
+  if (product) {
+    product.count = +product.count === 99 ? 99 : +product.count + 1;
+  } else {
+    basket.push({ id, count: 1 })
+  }
 
   localStorage.setItem('basket', JSON.stringify(basket));
 
   renderProducts();
+  renderBasket();
 } // ADD TO BASKET
+
+function subtractFromBasket(id) {
+  const basket = getBasket();
+
+  const product = basket.find((el) => {
+    return el.id === id;
+  });
+
+  product.count = +product.count - 1 || 1;
+
+  localStorage.setItem('basket', JSON.stringify(basket));
+
+  renderProducts();
+  renderBasket();
+} // SUBTRACT FROM BASKET
+
+function removeFromBasket(id) {
+  const basket = getBasket();
+  const productIndex = basket.findIndex(prod => prod.id === id);
+
+  basket.splice(productIndex, 1);
+
+  localStorage.setItem('basket', JSON.stringify(basket));
+
+  renderProducts();
+  renderBasket();
+} // REMOVE FROM BASKET
+
+function clearBasket() {
+  localStorage.setItem('basket', JSON.stringify([]));
+
+  renderProducts();
+  renderBasket();
+} // CLEAR BASKET
+
+basket.addEventListener('click', (e) => {
+  const basketItem = e.target.closest('.basket__item');
+  const clear = e.target.closest('.basket__clear');
+  const counter = e.target.closest('.basket__item-counter');
+  const deleteBtn = e.target.closest('.basket__item-delete');
+
+  if (clear) {
+    clearBasket();
+  }
+
+  if (deleteBtn) {
+    removeFromBasket(basketItem.id);
+  }
+
+  if (counter) {
+    changeCount(basketItem, e);
+  }
+});
+
+function changeCount(item, event) {
+  const minus = item.querySelector('.count-button--minus');
+  const plus = item.querySelector('.count-button--plus');
+  const count = item.querySelector('.basket__item-count');
+
+  if (event.target === minus) {
+    subtractFromBasket(item.id);
+  }
+
+  if (event.target === plus) {
+    addToBasket(item.id);
+  }
+}
+
+function renderBasket() {
+  const currentBasket = getBasket();
+  const basketContent = basket.querySelector('.basket__content');
+  const totalPrice = basket.querySelector('.basket__total-price');
+
+  if (!currentBasket.length) {
+    basketContent.classList.remove('active');
+    return;
+  } else if (!basketContent.classList.contains('active')) {
+    basketContent.classList.add('active');
+  }
+
+  basketContent.innerHTML = '';
+
+  let sumOfPrices = 0;
+
+  currentBasket.forEach(product => {
+    const initialProduct = initialProducts.find(el => el.id === +product.id);
+    sumOfPrices += product.count * initialProduct.price;
+
+    basketContent.insertAdjacentHTML('beforeend', `
+      <div class="basket__item" id="${ product.id }">
+        <div class="basket__image-wrapper">
+          <img
+            src="${ initialProduct.img }"
+            alt="phone image"
+            class="basket__item-image"
+          >
+        </div>
+
+        <div class="basket__item-description">
+          <h3 class="basket__item-title">${ initialProduct.name }</h3>
+          <span class="basket__item-price">${ convertPrice(initialProduct.price) } грн</span>
+        </div>
+
+        <div class="basket__item-counter">
+          <button class="count-button count-button--minus"></button>
+          <span class="basket__item-count">${ product.count }</span>
+          <button class="count-button count-button--plus"></button>
+        </div>
+
+        <span class="basket__item-total">${ convertPrice(product.count * initialProduct.price) } грн</span>
+
+        <button class="basket__item-delete">&#215;</button>
+      </div>
+    `)
+  });
+
+  totalPrice.innerHTML = `${convertPrice(sumOfPrices)} грн`;
+}
 
 const clear = document.querySelector('.basket__clear');
 
 clear.addEventListener('mouseover', (e) => {
   e.target.classList.add('active');
-})
+});
 
 clear.addEventListener("mouseout", (e) => {
   e.target.classList.remove('active');
 });
 
-clear.addEventListener('click', (e) => {
-  localStorage.setItem('basket', JSON.stringify([]));
-
-  renderProducts();
-});
-
 function getBasket() {
   return JSON.parse(localStorage.getItem('basket'));
 }
+
+// RICKROLLLLLL
+
+const magicButton = document.querySelector('.basket__order-button');
+
+magicButton.addEventListener('click', () => {
+  document.body.innerHTML = `
+    <div class="rickroll">
+      <video src="./video/Rick Astley - Never Gonna Give You Up (Official Music Video).mp4" preload="auto" autoplay></video>
+    </div>
+  `;
+});
