@@ -119,14 +119,33 @@ button {
   flex-basis: 12rem;
 }
 .header__icon {
+  position: relative;
   width: 4rem;
   height: 4rem;
 }
 .header__icon--heart:hover {
   color: #e90000;
 }
-.header__icon--basket:hover {
-  color: #00a7e4;
+.header__icon--basket:hover, .header__icon--basket.active {
+  color: #00B2F2;
+}
+.header__icon.active .header__icon-counter {
+  display: block;
+}
+.header__icon-counter {
+  display: none;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  border-radius: 50%;
+  top: 0;
+  right: -4px;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 20px;
+  color: #fff;
+  background-color: #00ac45;
 }
 .header .animatedSvg {
   color: currentColor;
@@ -188,6 +207,8 @@ button {
   flex-direction: column;
   gap: 5px;
   height: max-content;
+  max-height: calc(100vh - 8rem - 150px);
+  overflow-y: scroll;
   padding: 5px;
 }
 .basket__content.active {
@@ -209,7 +230,6 @@ button {
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
-  overflow: hidden;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
@@ -568,8 +588,22 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 10px;
+  position: relative;
   height: max-content;
   margin-bottom: 10px;
+}
+
+.no-goods {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  text-align: center;
+  font-size: 4rem;
+  color: #000;
+  cursor: default;
 }
 
 /* ----- product card ----- */
@@ -582,6 +616,7 @@ button {
   padding: 15px;
   background-color: #fff;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  cursor: default;
 }
 .product-card:hover {
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.6);

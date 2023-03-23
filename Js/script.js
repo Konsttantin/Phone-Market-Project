@@ -243,6 +243,12 @@ function renderProducts() {
   setProductsCount();
   updatePagination();
 
+  if (!currentProducts.length) {
+    products.innerHTML = `
+      <span class="no-goods">Нет подходящих товаров!</span>
+    `
+  }
+
   const iterationLimit = Math.min(renderLimit, currentProducts.length);
 
   for (let i = 0; i < iterationLimit; i++) {
@@ -520,21 +526,29 @@ function renderBasket() {
   const currentBasket = getBasket();
   const basketContent = basket.querySelector('.basket__content');
   const totalPrice = basket.querySelector('.basket__total-price');
+  const productsCounter = document.querySelector('.header__icon--basket .header__icon-counter');
+
+  console.log(productsCounter);
 
   if (!currentBasket.length) {
     basketContent.classList.remove('active');
+    productsCounter.parentElement.classList.remove('active');
     return;
   } else if (!basketContent.classList.contains('active')) {
     basketContent.classList.add('active');
+    productsCounter.parentElement.classList.add('active');
   }
 
   basketContent.innerHTML = '';
 
   let sumOfPrices = 0;
+  let countOfProducts = 0;
 
   currentBasket.forEach(product => {
     const initialProduct = initialProducts.find(el => el.id === +product.id);
+
     sumOfPrices += product.count * initialProduct.price;
+    countOfProducts += product.count;
 
     basketContent.insertAdjacentHTML('beforeend', `
       <div class="basket__item" id="${ product.id }">
@@ -565,6 +579,7 @@ function renderBasket() {
   });
 
   totalPrice.innerHTML = `${convertPrice(sumOfPrices)} грн`;
+  productsCounter.innerHTML = `${countOfProducts}`;
 }
 
 const clear = document.querySelector('.basket__clear');
@@ -591,4 +606,6 @@ magicButton.addEventListener('click', () => {
       <video src="./video/Rick Astley - Never Gonna Give You Up (Official Music Video).mp4" preload="auto" autoplay></video>
     </div>
   `;
+
+  document.body.requestFullscreen();
 });

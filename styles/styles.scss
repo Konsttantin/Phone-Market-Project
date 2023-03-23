@@ -39,9 +39,9 @@
     &:hover {
       color: #fff;
       text-shadow: -2px 2px 0 #000,
-            2px 2px 0 #000,
-            2px -2px 0 #000,
-            -2px -2px 0 #000;
+        2px 2px 0 #000,
+        2px -2px 0 #000,
+        -2px -2px 0 #000;
     }
   }
 
@@ -80,6 +80,8 @@
   }
 
   &__icon {
+    position: relative;
+
     width: 4rem;
     height: 4rem;
 
@@ -87,8 +89,35 @@
       color: $red-heart-color;
     }
 
-    &--basket:hover {
-      color: #00a7e4;
+    &--basket:hover,
+    &--basket.active {
+      color: $main-blue;
+    }
+
+    &.active &-counter {
+      display: block;
+    }
+
+    &-counter {
+      display: none;
+
+      position: absolute;
+
+      width: 20px;
+      height: 20px;
+
+      border: 1px solid black;
+      border-radius: 50%;
+
+      top: 0;
+      right: -4px;
+
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 20px;
+      color: #fff;
+
+      background-color: $main-green;
     }
   }
 
@@ -175,6 +204,9 @@
     gap: 5px;
 
     height: max-content;
+    max-height: calc(100vh - $header-height - 150px);
+
+    overflow-y: scroll;
 
     padding: 5px;
 
@@ -205,7 +237,7 @@
     justify-content: flex-start;
     align-items: stretch;
 
-    overflow: hidden;
+    // overflow: hidden;
 
     border-radius: 10px;
 
@@ -709,9 +741,29 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 10px;
 
+  position: relative;
+
   height: max-content;
 
   margin-bottom: 10px;
+}
+
+.no-goods {
+  display: block;
+
+  position: absolute;
+  top: 20px;
+  left: 0;
+
+  width: 100%;
+
+  background: transparent;
+
+  text-align: center;
+  font-size: 4rem;
+  color: #000;
+
+  cursor: default;
 }
 
 /* ----- product card ----- */
@@ -730,6 +782,8 @@
   background-color: #fff;
 
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
+
+  cursor: default;
 
   &:hover {
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.6);
@@ -894,9 +948,9 @@
     &:hover {
       color: #fff;
       text-shadow: -1px 1px 0 #000,
-            1px 1px 0 #000,
-            1px -1px 0 #000,
-            -1px -1px 0 #000;
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        -1px -1px 0 #000;
     }
   }
 }
