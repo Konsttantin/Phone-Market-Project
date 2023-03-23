@@ -11,8 +11,7 @@ export const initialProducts = [
     ram: 4,
     sim: 1,
     prod: 'APPLE',
-    security: ['face'],
-    inBasket: false
+    security: ['face']
   },
 
   {
@@ -27,8 +26,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'APPLE',
-    security: ['face'],
-    inBasket: true
+    security: ['face']
   },
   
   {
@@ -43,8 +41,7 @@ export const initialProducts = [
     ram: 4,
     sim: 1,
     prod: 'APPLE',
-    security: ['face'],
-    inBasket: false
+    security: ['face']
   },
 
   {
@@ -59,8 +56,7 @@ export const initialProducts = [
     ram: 6,
     sim: 1,
     prod: 'APPLE',
-    security: ['face'],
-    inBasket: false
+    security: ['face']
   },
 
   {
@@ -75,8 +71,7 @@ export const initialProducts = [
     ram: 4,
     sim: 1,
     prod: 'APPLE',
-    security: ['face'],
-    inBasket: false
+    security: ['face']
   },
 
   {
@@ -91,8 +86,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'APPLE',
-    security: ['face'],
-    inBasket: false
+    security: ['face']
   },
 
   {
@@ -107,8 +101,7 @@ export const initialProducts = [
     ram: 3,
     sim: 1,
     prod: 'APPLE',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -123,8 +116,7 @@ export const initialProducts = [
     ram: 4,
     sim: 1,
     prod: 'APPLE',
-    security: ['face'],
-    inBasket: false
+    security: ['face']
   },
 
   {
@@ -139,8 +131,7 @@ export const initialProducts = [
     ram: 4,
     sim: 1,
     prod: 'APPLE',
-    security: ['face'],
-    inBasket: false
+    security: ['face']
   },
 
   {
@@ -155,8 +146,7 @@ export const initialProducts = [
     ram: 4,
     sim: 1,
     prod: 'APPLE',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -171,8 +161,7 @@ export const initialProducts = [
     ram: 12,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['face', 'touch'],
-    inBasket: false
+    security: ['face', 'touch']
   },
 
   {
@@ -187,8 +176,7 @@ export const initialProducts = [
     ram: 12,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['face', 'touch'],
-    inBasket: false
+    security: ['face', 'touch']
   },
 
   {
@@ -203,8 +191,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['face', 'touch'],
-    inBasket: false
+    security: ['face', 'touch']
   },
 
   {
@@ -219,8 +206,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['face', 'touch'],
-    inBasket: false
+    security: ['face', 'touch']
   },
 
   {
@@ -235,8 +221,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['face', 'touch'],
-    inBasket: false
+    security: ['face', 'touch']
   },
 
   {
@@ -251,8 +236,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 
   {
@@ -267,8 +251,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 
   {
@@ -283,8 +266,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 
   {
@@ -299,8 +281,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -315,8 +296,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -331,8 +311,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -347,8 +326,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -363,8 +341,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -379,8 +356,7 @@ export const initialProducts = [
     ram: 4,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -395,8 +371,7 @@ export const initialProducts = [
     ram: 4,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -411,8 +386,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -427,8 +401,7 @@ export const initialProducts = [
     ram: 4,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -443,8 +416,7 @@ export const initialProducts = [
     ram: 4,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -459,8 +431,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -475,8 +446,7 @@ export const initialProducts = [
     ram: 4,
     sim: 2,
     prod: 'SAMSUNG',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -491,8 +461,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'TECNO',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 
   {
@@ -507,8 +476,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'TECNO',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 
   {
@@ -523,8 +491,7 @@ export const initialProducts = [
     ram: 8,
     sim: 2,
     prod: 'TECNO',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 
   {
@@ -539,8 +506,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'TECNO',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 
   {
@@ -555,8 +521,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'TECNO',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -571,8 +536,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'TECNO',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 
   {
@@ -587,8 +551,7 @@ export const initialProducts = [
     ram: 6,
     sim: 2,
     prod: 'TECNO',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 
   {
@@ -603,8 +566,7 @@ export const initialProducts = [
     ram: 4,
     sim: 2,
     prod: 'TECNO',
-    security: ['touch'],
-    inBasket: false
+    security: ['touch']
   },
 
   {
@@ -619,8 +581,7 @@ export const initialProducts = [
     ram: 4,
     sim: 2,
     prod: 'TECNO',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 
   {
@@ -635,7 +596,6 @@ export const initialProducts = [
     ram: 4,
     sim: 2,
     prod: 'TECNO',
-    security: ['touch', 'face'],
-    inBasket: false
+    security: ['touch', 'face']
   },
 ];

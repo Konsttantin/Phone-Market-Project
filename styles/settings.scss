@@ -58,16 +58,16 @@ button {
 
   color: #fff;
 
-  background-color: #00ac45;
+  background-color: $main-green;
 
   transition: all .2s ease;
 
   &:hover {
-    background-color: darken(#00ac45, 5%);
+    background-color: darken($main-green, 5%);
   }
 
   &:active {
-    background-color: darken(#00ac45, 10%);
+    background-color: darken($main-green, 10%);
     transition: none;
   }
 }
