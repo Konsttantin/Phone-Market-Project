@@ -8,10 +8,14 @@ const products = document.querySelector('.products');
 const pagination = document.querySelector('.main__pagination');
 const searchBar = document.querySelector('.header__field');
 const basket = document.querySelector('.basket');
+const wishlistIcon = document.querySelector('.header__icon--heart');
+const logo = document.querySelector('.header__logo');
 
 let currentSortOption = document.getElementById('default'); // stores state of sort buttons
 
 let currentProducts = [...initialProducts]; // contains actual product-objects
+
+let showFavorites = false;
 
 const filterOptions = {
   min: getLimitPrice(initialProducts, 'min'),
@@ -98,7 +102,7 @@ filters.addEventListener('click', (e) => {
   const description = e.target.closest('.filter__description');
 
   if (description) {
-    description.classList.toggle('active', description);
+    description.classList.toggle('active');
   }
 }); // open/close filters
 
@@ -248,6 +252,11 @@ function renderProducts() {
   products.innerHTML = '';
 
   filterProducts(filterOptions);
+
+  if (showFavorites) {
+    sortByWishlist();
+  }
+
   setProductsCount();
   updatePagination();
   setWishlistCounter();
@@ -256,6 +265,8 @@ function renderProducts() {
     products.innerHTML = `
       <span class="no-goods">Нет подходящих товаров!</span>
     `
+
+    return;
   }
 
   const iterationLimit = Math.min(renderLimit, currentProducts.length);
@@ -421,7 +432,11 @@ function handleBasketState(e) {
     return;
   }
 
-  basket.classList.toggle('active', targetBasket || basketItem || buyButton);
+  if (buyButton) {
+    return;
+  }
+
+  basket.classList.toggle('active', targetBasket || basketItem);
 }
 
 // functions for storage manipulations
@@ -525,15 +540,8 @@ function renderBasket() {
   const totalPrice = basket.querySelector('.basket__total-price');
   const productsCounter = document.querySelector('.header__icon--basket .header__icon-counter');
 
-  if (!currentBasket.length) {
-    basketContent.classList.remove('active');
-    productsCounter.parentElement.classList.remove('active');
-
-    return;
-  } else if (!basketContent.classList.contains('active')) {
-    basketContent.classList.add('active');
-    productsCounter.parentElement.classList.add('active');
-  }
+  basketContent.classList.toggle('active', currentBasket.length);
+  productsCounter.parentElement.classList.toggle('active', currentBasket.length);
 
   basketContent.innerHTML = '';
 
@@ -578,25 +586,48 @@ function renderBasket() {
   productsCounter.innerHTML = `${countOfProducts}`;
 }
 
-const clear = document.querySelector('.basket__clear');
+basket.addEventListener('mouseover', (e) => {
+  const clear = document.querySelector('.basket__clear');
 
-clear.addEventListener('mouseover', (e) => {
-  e.target.classList.add('active');
-});
-
-clear.addEventListener("mouseout", (e) => {
-  e.target.classList.remove('active');
-});
+  clear.classList.toggle('active', e.target === clear);
+}); // animate trash bin in basket
 
 // WISHLIST
 
+wishlistIcon.addEventListener('click', (e) => {
+  if (wishlistIcon.classList.contains('active')) {
+    showFavorites = true;
+
+    renderProducts();
+  }
+});
+
+logo.addEventListener('click', () => {
+  if (showFavorites) {
+    showFavorites = false;
+
+    renderProducts();
+  }
+});
+
 function setWishlistCounter() {
-  const wishlistHeart = document.querySelector('.header__icon--heart');
-  const wishlistCounter = wishlistHeart.querySelector('.header__icon-counter');
+  const wishlistCounter = wishlistIcon.querySelector('.header__icon-counter');
   const wishlist = getStorageCell('wishlist');
 
-  wishlistHeart.classList.toggle('active', wishlist.length);
+  wishlistIcon.classList.toggle('active', wishlist.length);
   wishlistCounter.innerHTML = `${wishlist.length}`;
+}
+
+function sortByWishlist() {
+  const wishlist = getStorageCell('wishlist');
+
+  if (!wishlist.length) {
+    return;
+  }
+
+  currentProducts = currentProducts.filter(product => {
+    return wishlist.some(fav => +fav.id === product.id);
+  });
 }
 
 // RICKROLLLLLL
