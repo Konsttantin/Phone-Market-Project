@@ -622,8 +622,6 @@ function sortByWishlist() {
   const wishlist = getStorageCell('wishlist');
 
   if (!wishlist.length) {
-    showFavorites = false;
-
     return;
   }
 
