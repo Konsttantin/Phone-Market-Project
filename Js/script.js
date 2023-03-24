@@ -68,11 +68,12 @@ Object.defineProperties(filterOptions, {
 });
 
 function getLimitPrice(arr, limit) {
-  if (limit === 'max') {
-    return Math.max(...arr.map(el => el.price));
+  switch (limit) {
+    case 'max':
+      return Math.max(...arr.map(el => el.price));
+    case 'min':
+      return Math.min(...arr.map(el => el.price));
   }
-
-  return Math.min(...arr.map(el => el.price));
 } // get max or min price of products in given array
 
 function setLimitPrices(arr, limit) {
@@ -97,9 +98,9 @@ filters.addEventListener('click', (e) => {
   const description = e.target.closest('.filter__description');
 
   if (description) {
-    description.classList.toggle('active');
+    description.classList.toggle('active', description);
   }
-}); // Open/close filters
+}); // open/close filters
 
 // ---------- SEARCHING ----------
 
@@ -130,7 +131,7 @@ filters.addEventListener('input', (e) => {
   }
 
   filterOptions.setOptions(input, filter.dataset.option);
-}); // Handle filter input
+}); // handle filter input
 
 function filterProducts(options) {
   currentProducts = initialProducts.filter(product => {
@@ -185,7 +186,7 @@ sortOptions.addEventListener('click', (e) => {
 
     sortProducts(sortOption.dataset.option, sortOption.id === 'price-asc');
   }
-}); // Handle sort buttons
+}); // handle sort buttons
 
 function sortProducts(option, asc) {
   if (!option) {
@@ -203,7 +204,7 @@ function sortProducts(option, asc) {
   });
 
   renderProducts();
-} // Sort any list
+} // sort any list
 
 products.addEventListener('click', (e) => {
   e.preventDefault();
@@ -213,12 +214,19 @@ products.addEventListener('click', (e) => {
   const buyButton = e.target.closest('.product-card__button');
 
   if (heart) {
-    heart.classList.toggle('active');
+    const InWishlist = getStorageCell('wishlist')
+      .some(prod => prod.id === productCard.id);
+
+    InWishlist
+      ? removeFromStorageCell(productCard.id, 'wishlist')
+      : addToStorageCell(productCard.id, 'wishlist', false)
+
+    setWishlistCounter();
     return;
   }
 
-  if (!buyButton?.classList.contains('in-basket') && buyButton) {
-    addToBasket(productCard.id);
+  if (buyButton && !buyButton?.classList.contains('in-basket')) {
+    addToStorageCell(productCard.id, 'basket', true);
   }
 }); // handling events on product cards
 
@@ -242,6 +250,7 @@ function renderProducts() {
   filterProducts(filterOptions);
   setProductsCount();
   updatePagination();
+  setWishlistCounter();
 
   if (!currentProducts.length) {
     products.innerHTML = `
@@ -254,7 +263,8 @@ function renderProducts() {
   for (let i = 0; i < iterationLimit; i++) {
     const product = currentProducts[i];
 
-    const inBasket = getBasket().some(prod => +prod.id === product.id);
+    const inBasket = getStorageCell('basket').some(prod => +prod.id === product.id);
+    const InWishlist = getStorageCell('wishlist').some(prod => +prod.id === product.id);
 
     products.insertAdjacentHTML('beforeend', `
       <div class="product-card" id="${ product.id }">
@@ -278,7 +288,7 @@ function renderProducts() {
 
         <div class="product-card__buy-section">
           <a href="#" class="buy-button product-card__button${ inBasket ? ` in-basket` : '' }">${ inBasket ? `В корзину` : `Купить`}</a>
-          <a class="product-card__icon${ product.favourite ? ` active` : '' }" href="#">
+          <a class="product-card__icon${ InWishlist ? ` active` : '' }" href="#">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path class="animatedSvg" d="M4.45067 13.9082L11.4033 20.4395C11.6428 20.6644 11.7625 20.7769 11.9037 20.8046C11.9673 20.8171 12.0327 20.8171 12.0963 20.8046C12.2375 20.7769 12.3572 20.6644 12.5967 20.4395L19.5493 13.9082C21.5055 12.0706 21.743 9.0466 20.0978 6.92607L19.7885 6.52734C17.8203 3.99058 13.8696 4.41601 12.4867 7.31365C12.2913 7.72296 11.7087 7.72296 11.5133 7.31365C10.1304 4.41601 6.17972 3.99058 4.21154 6.52735L3.90219 6.92607C2.25695 9.0466 2.4945 12.0706 4.45067 13.9082Z" stroke="#000" stroke-width="2"/>
             </svg>
@@ -330,13 +340,7 @@ function setProductsCount() {
 } // set count of current products
 
 function updatePagination() {
-  if (renderLimit < currentProducts.length && !pagination.classList.contains('active')) {
-    pagination.classList.add('active');
-  }
-
-  if (renderLimit >= currentProducts.length) {
-    pagination.classList.remove('active');
-  }
+  pagination.classList.toggle('active', renderLimit < currentProducts.length);
 } // update pagination button state
 
 function getStars(rating) {
@@ -389,6 +393,10 @@ function initializePage() {
     localStorage.setItem('basket', JSON.stringify([]));
   }
 
+  if (!localStorage.getItem('wishlist')) {
+    localStorage.setItem('wishlist', JSON.stringify([]));
+  }
+
   renderProducts();
   setLimitPrices();
   renderBasket();
@@ -404,90 +412,80 @@ function handleBasketState(e) {
 
   if (basketIcon) {
     e.preventDefault();
-    basket.classList.contains('active') ? closeBasket() : openBasket();
+    basket.classList.toggle('active');
     return;
   }
 
   if (buyButton?.classList.contains('in-basket')) {
-    openBasket();
+    basket.classList.toggle('active', buyButton.classList.contains('in-basket'));
     return;
   }
 
-  if (buyButton || basketItem) {
-    return;
-  }
-
-  if (!targetBasket) {
-    closeBasket();
-  }
+  basket.classList.toggle('active', targetBasket || basketItem || buyButton);
 }
 
-function closeBasket() {
-  if (basket.classList.contains('active')) {
-    basket.classList.remove('active');
-  }
-}
+// functions for storage manipulations
 
-function openBasket() {
-  if (basket.classList.contains('active')) {
-    return;
-  }
+function addToStorageCell(id, cellName, incremental) {
+  const cell = getStorageCell(cellName);
 
-  basket.classList.add('active');
-}
-
-function addToBasket(id) {
-  const basket = getBasket();
-
-  const product = basket.find((el) => {
+  const product = cell.find((el) => {
     return el.id === id;
   });
 
-  if (product) {
+  if (product && incremental) {
     product.count = +product.count === 99 ? 99 : +product.count + 1;
-  } else {
-    basket.push({ id, count: 1 })
+  } else if (!product) {
+    incremental ? cell.push({ id, count: 1 }) : cell.push({ id });
   }
 
-  localStorage.setItem('basket', JSON.stringify(basket));
+  setStorageCell(cellName, cell);
 
   renderProducts();
   renderBasket();
-} // ADD TO BASKET
+}
 
-function subtractFromBasket(id) {
-  const basket = getBasket();
+function getStorageCell(cellName) {
+  return JSON.parse(localStorage.getItem(cellName));
+}
 
-  const product = basket.find((el) => {
+function setStorageCell(cellName, cell) {
+  localStorage.setItem(cellName, JSON.stringify(cell));
+}
+
+function subtractFromStorageCell(id, cellName) {
+  const cell = getStorageCell(cellName);
+
+  const product = cell.find((el) => {
     return el.id === id;
   });
 
   product.count = +product.count - 1 || 1;
 
-  localStorage.setItem('basket', JSON.stringify(basket));
+  setStorageCell(cellName, cell);
 
   renderProducts();
   renderBasket();
-} // SUBTRACT FROM BASKET
+}
 
-function removeFromBasket(id) {
-  const basket = getBasket();
-  const productIndex = basket.findIndex(prod => prod.id === id);
+function removeFromStorageCell(id, cellName) {
+  const cell = getStorageCell(cellName);
+  const productIndex = cell.findIndex(prod => prod.id === id);
 
-  basket.splice(productIndex, 1);
+  cell.splice(productIndex, 1);
 
-  localStorage.setItem('basket', JSON.stringify(basket));
-
-  renderProducts();
-  renderBasket();
-} // REMOVE FROM BASKET
-
-function clearBasket() {
-  localStorage.setItem('basket', JSON.stringify([]));
+  setStorageCell(cellName, cell);
 
   renderProducts();
   renderBasket();
-} // CLEAR BASKET
+}
+
+function clearStorageCell(cellName) {
+  localStorage.setItem(cellName, JSON.stringify([]));
+
+  renderProducts();
+  renderBasket();
+}
 
 basket.addEventListener('click', (e) => {
   const basketItem = e.target.closest('.basket__item');
@@ -496,43 +494,41 @@ basket.addEventListener('click', (e) => {
   const deleteBtn = e.target.closest('.basket__item-delete');
 
   if (clear) {
-    clearBasket();
+    clearStorageCell('basket');
   }
 
   if (deleteBtn) {
-    removeFromBasket(basketItem.id);
+    removeFromStorageCell(basketItem.id, 'basket');
   }
 
   if (counter) {
     changeCount(basketItem, e);
   }
-});
+}); // handle different clicks in basket area
 
 function changeCount(item, event) {
   const minus = item.querySelector('.count-button--minus');
   const plus = item.querySelector('.count-button--plus');
-  const count = item.querySelector('.basket__item-count');
 
   if (event.target === minus) {
-    subtractFromBasket(item.id);
+    subtractFromStorageCell(item.id, 'basket');
   }
 
   if (event.target === plus) {
-    addToBasket(item.id);
+    addToStorageCell(item.id, 'basket', true);
   }
 }
 
 function renderBasket() {
-  const currentBasket = getBasket();
+  const currentBasket = getStorageCell('basket');
   const basketContent = basket.querySelector('.basket__content');
   const totalPrice = basket.querySelector('.basket__total-price');
   const productsCounter = document.querySelector('.header__icon--basket .header__icon-counter');
 
-  console.log(productsCounter);
-
   if (!currentBasket.length) {
     basketContent.classList.remove('active');
     productsCounter.parentElement.classList.remove('active');
+
     return;
   } else if (!basketContent.classList.contains('active')) {
     basketContent.classList.add('active');
@@ -592,8 +588,15 @@ clear.addEventListener("mouseout", (e) => {
   e.target.classList.remove('active');
 });
 
-function getBasket() {
-  return JSON.parse(localStorage.getItem('basket'));
+// WISHLIST
+
+function setWishlistCounter() {
+  const wishlistHeart = document.querySelector('.header__icon--heart');
+  const wishlistCounter = wishlistHeart.querySelector('.header__icon-counter');
+  const wishlist = getStorageCell('wishlist');
+
+  wishlistHeart.classList.toggle('active', wishlist.length);
+  wishlistCounter.innerHTML = `${wishlist.length}`;
 }
 
 // RICKROLLLLLL

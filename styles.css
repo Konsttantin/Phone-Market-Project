@@ -123,7 +123,7 @@ button {
   width: 4rem;
   height: 4rem;
 }
-.header__icon--heart:hover {
+.header__icon--heart:hover, .header__icon--heart.active {
   color: #e90000;
 }
 .header__icon--basket:hover, .header__icon--basket.active {

@@ -85,7 +85,8 @@
     width: 4rem;
     height: 4rem;
 
-    &--heart:hover {
+    &--heart:hover,
+    &--heart.active {
       color: $red-heart-color;
     }
 
