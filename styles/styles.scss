@@ -6,6 +6,7 @@
   height: 100%;
 
   margin: 0 auto;
+  padding-left: 10px;
 }
 
 /* ---------- HEADER ---------- */
@@ -30,7 +31,7 @@
 
   &__logo {
     font-family: 'Rubik Mono One', sans-serif;
-    font-size: 3.5rem;
+    font-size: min(3.5rem, 6vw)
   }
 
   &__link {
@@ -47,6 +48,8 @@
 
   &__searchbar {
     flex-basis: 70rem;
+
+    margin-left: 10px;
   }
 
   &__field {
@@ -77,6 +80,8 @@
     display: flex;
     justify-content: space-around;
     flex-basis: 12rem;
+
+    margin-left: 10px;
   }
 
   &__icon {
@@ -138,7 +143,9 @@
   top: calc($header-height + 15px);
   transform: translateX(110%);
 
-  width: 700px;
+  max-width: 700px;
+  min-width: 300px;
+  width: 90%;
   height: max-content;
 
   padding: 15px;
@@ -237,8 +244,6 @@
     display: flex;
     justify-content: flex-start;
     align-items: stretch;
-
-    // overflow: hidden;
 
     border-radius: 10px;
 
@@ -493,12 +498,15 @@
 /* ----- filters ----- */
 
 .filters {
+  // display: none;
+
   align-self: flex-start;
   position: sticky;
 
   top: calc($header-height + 10px);
 
-  min-width: 300px;
+  max-width: 300px;
+  width: 100%;
 
   &__list {
     display: flex;
@@ -683,7 +691,7 @@
   display: flex;
   justify-content: start;
 
-  padding-left: 10px;
+  padding: 0 10px;
 
   background-color: #fff;
 
@@ -747,6 +755,7 @@
   height: max-content;
 
   margin-bottom: 10px;
+  padding: 0 5px;
 }
 
 .no-goods {
