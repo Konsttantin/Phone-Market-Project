@@ -87,18 +87,19 @@ button {
 .header__logo {
   font-family: "Rubik Mono One", sans-serif;
   font-size: 3.5rem;
-  transition: width 1s ease;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 @media screen and (max-width: 1280px) {
   .header__logo {
     font-size: 2.2rem;
     text-align: center;
-    max-width: min-content;
+    width: 100%;
+    max-width: 150px;
   }
 }
 .header__logo.hidden {
-  overflow: hidden;
-  max-width: 0;
+  width: 0;
 }
 .header__link {
   transition: all 0.2s ease;
@@ -108,7 +109,8 @@ button {
   text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 .header__searchbar {
-  flex-basis: 70rem;
+  max-width: 700px;
+  flex-grow: 1;
   margin-left: 10px;
 }
 .header__field {
@@ -123,6 +125,7 @@ button {
   border-radius: 5px;
   box-shadow: 0px 2px 2px 0px rgba(61, 61, 61, 0.4);
   font-size: 2rem;
+  text-overflow: ellipsis;
   transition: all 0.3s ease;
 }
 .header__field:hover {
@@ -131,7 +134,10 @@ button {
 .header__icons {
   display: flex;
   justify-content: space-around;
-  flex-basis: 12rem;
+  flex-grow: 1;
+  flex-shrink: 5;
+  width: 100%;
+  max-width: 120px;
   margin-left: 10px;
 }
 .header__icon {

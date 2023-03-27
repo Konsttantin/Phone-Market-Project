@@ -33,18 +33,20 @@
     font-family: 'Rubik Mono One', sans-serif;
     font-size: 3.5rem;
 
-    transition: width 1s ease;
+    overflow: hidden;
+
+    transition: all .3s ease;
 
     @media screen and (max-width: 1280px) {
       font-size: 2.2rem;
       text-align: center;
 
-      max-width: min-content;
+      width: 100%;
+      max-width: 150px;
     }
 
     &.hidden {
-      overflow: hidden;
-      max-width: 0;
+      width: 0;
     }
   }
 
@@ -61,7 +63,8 @@
   }
 
   &__searchbar {
-    flex-basis: 70rem;
+    max-width: 700px;
+    flex-grow: 1;
 
     margin-left: 10px;
   }
@@ -83,6 +86,8 @@
 
     font-size: 2rem;
 
+    text-overflow: ellipsis;
+
     transition: all .3s ease;
 
     &:hover {
@@ -93,7 +98,11 @@
   &__icons {
     display: flex;
     justify-content: space-around;
-    flex-basis: 12rem;
+    flex-grow: 1;
+    flex-shrink: 5;
+
+    width: 100%;
+    max-width: 120px;
 
     margin-left: 10px;
   }
