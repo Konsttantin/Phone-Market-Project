@@ -644,3 +644,17 @@ magicButton.addEventListener('click', () => {
 
   document.body.requestFullscreen();
 });
+
+// Media queries
+
+const queryForMobile = window.matchMedia('(max-width: 425px)');
+
+if (queryForMobile.matches) {
+  searchBar.addEventListener('focus', () => {
+    logo.classList.add('hidden');
+  })
+
+  searchBar.addEventListener('blur', () => {
+    logo.classList.remove('hidden');
+  })
+}
