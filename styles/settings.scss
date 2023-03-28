@@ -13,12 +13,14 @@ html {
   scroll-behavior: smooth;
 
   overflow-x: clip;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
   position: relative;
 
   overflow-x: clip;
+  -webkit-overflow-scrolling: touch;
 
   background-color: #F7F8F9;
 }
