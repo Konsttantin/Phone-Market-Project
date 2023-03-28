@@ -3,13 +3,17 @@
 import { initialProducts } from "./initialProducts.js";
 
 const filters = document.querySelector('.filters');
+const filtersButton = document.querySelector('.filters-button');
 const sortOptions = document.querySelector('.sort-options');
+const sortOptionsMob = document.querySelector('.sort-options--mobile');
 const products = document.querySelector('.products');
 const pagination = document.querySelector('.main__pagination');
 const searchBar = document.querySelector('.header__field');
 const basket = document.querySelector('.basket');
 const wishlistIcon = document.querySelector('.header__icon--heart');
 const logo = document.querySelector('.header__logo');
+
+console.log(sortOptionsMob.value);
 
 let currentSortOption = document.getElementById('default'); // stores state of sort buttons
 
@@ -648,6 +652,7 @@ magicButton.addEventListener('click', () => {
 // Media queries
 
 const queryForMobile = window.matchMedia('(max-width: 425px)');
+const queryForTablet = window.matchMedia('(max-width: 768px)');
 
 if (queryForMobile.matches) {
   searchBar.addEventListener('focus', () => {
@@ -657,4 +662,26 @@ if (queryForMobile.matches) {
   searchBar.addEventListener('blur', () => {
     logo.classList.remove('hidden');
   })
+}
+
+if (queryForTablet.matches) {
+  sortOptionsMob.addEventListener('change', (e) => {
+    const currentOption = e.target.options[e.target.selectedIndex];
+
+    sortProducts(currentOption.value, currentOption.dataset.asc);
+  });
+
+  filtersButton.addEventListener('click', () => {
+    filters.classList.toggle('active');
+  })
+
+  document.body.addEventListener('click', (e) => {
+    const target = e.target;
+
+    if (target === filtersButton) {
+      return;
+    }
+
+    filters.classList.toggle('active', target.closest('.filters'));
+  });
 }

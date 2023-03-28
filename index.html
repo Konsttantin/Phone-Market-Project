@@ -220,14 +220,27 @@
         </aside>
 
         <div class="main__content">
-          <div class="sort-options">
-            <span class="sort-options__description">Отсортировать по:</span>
-            <ul class="sort-options__list">
-              <li class="sort-options__item" id="price-desc" data-option="price">цене ↑</li>
-              <li class="sort-options__item" id="price-asc" data-option="price">цене ↓</li>
-              <li class="sort-options__item" id="rating" data-option="rating">рейтингу</li>
-              <li class="sort-options__item active" id="default">по умолчанию</li>
-            </ul>
+          <div class="main__content-header">
+            <div class="sort-options">
+              <span class="sort-options__description">Отсортировать по:</span>
+              <ul class="sort-options__list">
+                <li class="sort-options__item" id="price-desc" data-option="price">цене ↑</li>
+                <li class="sort-options__item" id="price-asc" data-option="price">цене ↓</li>
+                <li class="sort-options__item" id="rating" data-option="rating">рейтингу</li>
+                <li class="sort-options__item active" id="default">по умолчанию</li>
+              </ul>
+            </div>
+            
+            <button class="filters-button">Фильтры</button>
+
+            <div class="sort-options--mobile">
+              <select name="sort options">
+                <option value="price">цена ↑</option>
+                <option value="price" data-asc="true">цена ↓</option>
+                <option value="rating">рейтинг</option>
+                <option selected>по умолчанию</option>
+              </select>
+            </div>
           </div>
 
           <div class="products"></div>
