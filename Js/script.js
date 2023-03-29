@@ -675,13 +675,41 @@ if (queryForTablet.matches) {
     filters.classList.toggle('active');
   })
 
-  document.body.addEventListener('click', (e) => {
-    const target = e.target;
+  document.body.addEventListener('touchstart', handleTouchStart, false);
+  document.body.addEventListener('touchend', handleTouchMove, false);
 
-    if (target === filtersButton) {
+  let xDown = null;
+
+  function handleTouchStart(event) {
+    xDown = event.touches[0].clientX;
+  };
+
+  function handleTouchMove(event) {
+    if (!xDown) {
       return;
     }
 
-    filters.classList.toggle('active', target.closest('.filters'));
-  });
+    const xUp = event.changedTouches[0].clientX;
+    const xDiff = xUp - xDown;
+
+    if (xDiff > 100 && xDown < 50) {
+      handleSwipe(true);
+      xDown = null;
+
+      return;
+    }
+
+    if (xDiff < -150) {
+      handleSwipe(false);
+      xDown = null;
+
+      return;
+    }
+  };
+
+  function handleSwipe(open) {
+    const filterClasses = filters.classList;
+
+    filterClasses.toggle('active', open);
+  };
 }
