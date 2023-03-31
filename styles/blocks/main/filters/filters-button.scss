@@ -1,0 +1,27 @@
+.filters-button {
+  display: none;
+
+  background-color: #0094b9;
+
+  width: 160px;
+
+  padding: 18px 0;
+
+  color: #fff;
+  font-size: 1.7rem;
+  text-align: center;
+
+  border-radius: 5px;
+
+  transition: all .3s ease;
+
+  cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+
+  &:hover {
+    background-color: lighten(#0094b9, 5%);
+  }
+}

@@ -1,0 +1,116 @@
+.sort-options {
+  display: flex;
+  justify-content: start;
+
+  padding: 0 10px;
+
+  background-color: #fff;
+
+  border-radius: 5px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+
+  &--mobile {
+    display: none;
+    position: relative;
+
+    width: max-content;
+
+    @media screen and (max-width: 768px) {
+      display: block;
+    }
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      left: 5px;
+      top: 0;
+      bottom: 0;
+
+      height: 25px;
+      width: 25px;
+
+      margin: auto 0;
+
+      background-image: url(./svg/sort-icon.svg);
+      background-size: cover;
+
+      cursor: pointer;
+    }
+
+    & select {
+      background: none;
+      border: 0;
+      appearance: none;
+
+      height: 100%;
+
+      padding: 10px 10px 10px 30px;
+
+
+      text-align: center;
+      font-family: inherit;
+      font-size: 1.7rem;
+      color: #000;
+
+      border: 2px solid #eee;
+      border-radius: 5px;
+
+      cursor: pointer;
+
+      transition: all .2s ease;
+
+      &:hover {
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  &__description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: max-content;
+
+    font-size: 1.5rem;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 1.5vw;
+
+    width: 100%;
+
+    padding-left: 10px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: max-content;
+    height: 6rem;
+
+    font-size: 1.5rem;
+
+    cursor: pointer;
+
+    &:hover {
+      color: $main-blue;
+    }
+
+    &.active {
+      color: $main-blue;
+
+      border-bottom: 3px solid $main-blue;
+      padding-top: 3px;
+    }
+  }
+}

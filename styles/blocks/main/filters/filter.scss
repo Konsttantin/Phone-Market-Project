@@ -1,0 +1,171 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 280px;
+
+  padding: 10px;
+
+  border-radius: 5px;
+
+  background-color: #fff;
+
+  &__description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: $filter-text-size;
+    line-height: calc($filter-text-size + 10px);
+    font-weight: bold;
+
+    cursor: pointer;
+
+    &.active {
+      .filter__toggler::after {
+        transform: scaleY(0.1);
+      }
+
+      & + .filter__content {
+        display: flex;
+      }
+    }
+  }
+
+  &__toggler {
+    position: relative;
+
+    width: $filter-text-size;
+    height: $filter-text-size;
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      
+      left: 50%;
+
+      width: 2px;
+      height: $filter-text-size;
+
+      background-color: $main-text-color;
+
+      transform: translateX(-50%);
+      transform-origin: center;
+
+      transition: all .2s ease;
+    }
+
+    &::before {
+      content: '';
+
+      position: absolute;
+
+      top: 50%;
+
+      width: $filter-text-size;
+      height: 2px;
+
+      background-color: $main-text-color;
+
+      transform: translateY(-50%);
+    }
+  }
+
+  &__content {
+    display: none;
+    flex-direction: column;
+
+    .price-container {
+      display: flex;
+      justify-content: space-between;
+      align-items:center;
+
+      margin-top: 10px;
+
+      .price {
+        height: 4rem;
+        width: 100px;
+
+        text-align: center;
+
+        border: 1px solid #eee;
+        border-radius: 5px;
+
+        font-size: 2rem;
+      }
+
+      .delimiter {
+        height: 3px;
+        width: 20px;
+
+        background-color: $main-text-color;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding-top: 15px;
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__checkbox {
+    position: absolute;
+
+    appearance: none;
+
+    &:checked + .filter__label::before {
+      background-color: $main-blue;
+    }
+  }
+
+  &__label {
+    font-size: 1.5rem;
+
+    padding-left: 22px;
+
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+
+      left: 0;
+      top: 0;
+
+      width: 15px;
+      height: 15px;
+
+      border: 1px solid #ccc;
+      border-radius: 5px;
+
+      background-color: #fff;
+
+      transition: background-color .2s ease;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+
+      left: 2px;
+      top: 2px;
+
+      width: 12px;
+      height: 12px;
+
+      background-image: url(./svg/check-mark.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+}

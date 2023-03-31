@@ -1,0 +1,25 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: $footer-height;
+  background: rgb(66,66,66);
+  background: linear-gradient(0deg, rgba(66,66,66,1) 0%, rgba(247,248,249,1) 100%);
+
+  &__link {
+    font-family: 'Rampart One', cursive;
+    font-weight: bold;
+    font-size: 5rem;
+
+    transition: all .2s ease;
+
+    &:hover {
+      color: #fff;
+      text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        -1px -1px 0 #000;
+    }
+  }
+}

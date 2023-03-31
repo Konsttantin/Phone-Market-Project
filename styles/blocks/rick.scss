@@ -1,0 +1,17 @@
+.rickroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  cursor: none;
+
+  background-color: #000;
+  z-index: 99;
+}

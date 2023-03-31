@@ -1,0 +1,33 @@
+.filters {
+  align-self: flex-start;
+  position: sticky;
+
+  top: calc($header-height + 10px);
+
+  min-width: 280px;
+  max-width: 300px;
+  width: 100%;
+
+  margin-right: 5px;
+
+  @media screen and (max-width: 768px) {
+    overflow: hidden;
+    min-width: 0;
+    width: 0;
+    margin-right: 0;
+
+    transition: min-width .3s ease;
+
+    &.active {
+      min-width: 280px;
+
+      margin-right: 5px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
