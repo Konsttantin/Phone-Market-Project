@@ -39,11 +39,11 @@ export const currentAppState = {
       'товара': ['2', '3', '4'],
       'товар': ['1']
     };
-  
+
     for (const ending in wordEndings) {
       if (wordEndings[ending].some(end => productsCount.endsWith(end))) {
         counter.innerHTML=`${productsCount} ${ending}`;
-  
+
         return;
       }
     }
