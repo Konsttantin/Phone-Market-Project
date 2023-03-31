@@ -1,6 +1,6 @@
-import { getLimitPrice, setLimitPrices } from "./priceFunctions.js";
 import { initialProducts } from "../initialProducts.js";
 import { renderProducts } from "./renderProducts.js";
+import { getLimitPrice, setLimitPrices } from "./priceFunctions.js";
 
 export const filterOptions = {
   min: getLimitPrice(initialProducts, 'min'),
