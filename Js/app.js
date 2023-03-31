@@ -202,11 +202,11 @@ const queryForTablet = window.matchMedia('(max-width: 768px)');
 
 if (queryForMobile.matches) {
   appElements.searchBar.addEventListener('focus', () => {
-    logo.classList.add('hidden');
+    appElements.logo.classList.add('hidden');
   })
 
   appElements.searchBar.addEventListener('blur', () => {
-    logo.classList.remove('hidden');
+    appElements.logo.classList.remove('hidden');
   })
 }
 
@@ -218,7 +218,7 @@ if (queryForTablet.matches) {
   });
 
   appElements.filtersButton.addEventListener('click', () => {
-    filters.classList.toggle('active');
+    appElements.filters.classList.toggle('active');
   })
 
   document.body.addEventListener('touchstart', handleTouchStart, false);
@@ -254,7 +254,7 @@ if (queryForTablet.matches) {
   };
 
   function handleSwipe(open) {
-    const filterClasses = filters.classList;
+    const filterClasses = appElements.filters.classList;
 
     filterClasses.toggle('active', open);
   };
