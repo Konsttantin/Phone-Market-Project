@@ -11,3 +11,7 @@ The website's front-end allows for easy browsing and purchasing of smartphones. 
 - Search: Users can search for specific products by keyword.
 - Cart: Users can add products to their cart, remove products, change quantities, and clear the entire cart. The cart uses localStorage to store the IDs of the selected products.
 - Favorites: Users can select favorite products and view them separately, filtered and sorted in the same way as the main product list.
+
+## Live Demo
+
+The project can be viewed live on GitHub Pages [here](https://bioptat.github.io/Phone-Market-Project/).
