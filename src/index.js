@@ -188,7 +188,7 @@ const magicButton = document.querySelector('.basket__order-button');
 magicButton.addEventListener('click', () => {
   document.body.innerHTML = `
     <div class="rickroll">
-      <video src="./video/Rick Astley - Never Gonna Give You Up (Official Music Video).mp4" preload="auto" autoplay></video>
+      <video src="./public/video/Rick Astley - Never Gonna Give You Up (Official Music Video).mp4" preload="auto" autoplay></video>
     </div>
   `;
 

@@ -1,5 +1,5 @@
-import { appElements } from "../app.js";
-import { currentAppState } from "../app.js";
+import { appElements } from "../index.js";
+import { currentAppState } from "../index.js";
 
 import { storage } from "./storage.js";
 

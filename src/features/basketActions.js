@@ -1,7 +1,7 @@
 import { initialProducts } from "../initialProducts.js";
 
 import { storage } from "./storage.js";
-import { appElements } from "../app.js";
+import { appElements } from "../index.js";
 import { convertPrice } from "./renderProducts.js";
 
 export const basketActions = {

@@ -1,5 +1,5 @@
-import { currentAppState } from "../app.js";
-import { appElements } from "../app.js";
+import { currentAppState } from "../index.js";
+import { appElements } from "../index.js";
 
 import { filterProducts } from "./filterProducts.js";
 import { filterOptions } from "./filterOptions.js";

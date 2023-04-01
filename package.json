@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node index",
-    "SASS": "SASS ./styles/styles.scss ./styles.css --watch",
+    "SASS": "SASS ./public/styles/styles.scss ./public/styles.css --watch",
     "start:dev": "start npm run SASS & nodemon index.js"
   },
   "repository": {

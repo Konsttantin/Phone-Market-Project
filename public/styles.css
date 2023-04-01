@@ -254,7 +254,7 @@ button {
   cursor: pointer;
 }
 .basket__clear.active::before {
-  background-image: url(./img/bin.gif);
+  background-image: url(./assets/img/bin.gif);
 }
 .basket__clear::before {
   content: "";
@@ -262,7 +262,7 @@ button {
   left: -1.5em;
   height: 1.3333333333em;
   width: 1.3333333333em;
-  background-image: url(./img/bin-image.png);
+  background-image: url(./assets/img/bin-image.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -382,10 +382,10 @@ button {
   background-color: #aaa;
 }
 .basket__item-counter .count-button--plus {
-  background-image: url(./img/plus.png);
+  background-image: url(./assets/img/plus.png);
 }
 .basket__item-counter .count-button--minus {
-  background-image: url(./img/minus.png);
+  background-image: url(./assets/img/minus.png);
 }
 .basket__item-count {
   display: flex;

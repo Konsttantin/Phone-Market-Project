@@ -71,7 +71,7 @@
     cursor: pointer;
 
     &.active::before {
-      background-image: url(./img/bin.gif);
+      background-image: url(./assets/img/bin.gif);
     }
 
     &::before {
@@ -83,7 +83,7 @@
       height: calc(2em / 1.5);
       width: calc(2em / 1.5);
 
-      background-image: url(./img/bin-image.png);
+      background-image: url(./assets/img/bin-image.png);
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -236,11 +236,11 @@
         }
 
         &--plus {
-          background-image: url(./img/plus.png);
+          background-image: url(./assets/img/plus.png);
         }
 
         &--minus {
-          background-image: url(./img/minus.png);
+          background-image: url(./assets/img/minus.png);
         }
       }
     }

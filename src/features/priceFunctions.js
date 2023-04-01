@@ -1,4 +1,4 @@
-import { currentAppState } from "../app.js";
+import { currentAppState } from "../index.js";
 
 export function getLimitPrice(arr, limit) {
   switch (limit) {

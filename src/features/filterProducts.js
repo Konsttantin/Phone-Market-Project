@@ -1,5 +1,5 @@
 import { initialProducts } from "../initialProducts.js";
-import { currentAppState } from "../app.js";
+import { currentAppState } from "../index.js";
 
 export function filterProducts(options) {
   currentAppState.products = initialProducts.filter(product => {
