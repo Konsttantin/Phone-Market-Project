@@ -16,8 +16,4 @@ The website is also fully responsive and optimized for all screen sizes, includi
 
 ## Live Demo 🌐
 
-The project can be viewed live on GitHub Pages [here](https://bioptat.github.io/Phone-Market-Project/).
-
-
-	
-	
+The project can be viewed live on GitHub Pages [here](https://phone-market-project.onrender.com).
